@@ -91,7 +91,7 @@ body {
   z-index: 700;
 }
 
-/* === HEADER === */
+/* Header */
 header {
   position:fixed;
   top:0; left:0;
@@ -104,20 +104,13 @@ header {
   color:#000;
   box-shadow:none;
   z-index:900;
-  opacity:0; /* hidden initially */
+  opacity:0;
   transition: opacity 0.6s ease;
 }
-header.visible { opacity:1; } /* will appear after first section */
-.header-titles {
-  display:flex; gap:30px;
-  font-size:1.2rem;
-  transition: opacity 0.5s ease;
-}
+header.visible { opacity:1; }
+.header-titles { display:flex; gap:30px; font-size:1.2rem; transition: opacity 0.5s ease; }
 .title-item { cursor:pointer; }
-.menu {
-  width:30px; height:22px; position:relative; cursor:pointer; transition:opacity 0.5s ease;
-  opacity:0; /* hidden initially */
-}
+.menu { width:30px; height:22px; position:relative; cursor:pointer; transition:opacity 0.5s ease; opacity:0; }
 .menu span { position:absolute; height:3px; width:100%; background:#fff; border-radius:3px; left:0; transition:all 0.3s ease; }
 .menu span:nth-child(1){ top:0; }
 .menu span:nth-child(2){ top:9px; }
@@ -133,15 +126,10 @@ header.visible { opacity:1; } /* will appear after first section */
 /* Main Content */
 #mainContent { opacity:0; transition:opacity 1s ease; font-size:24px; }
 
-/* Section separator line */
-.section-separator {
-  width: 80%;
-  height: 3px;
-  background-color: #fff;
-  margin: 0 auto;
-}
+/* Section separator */
+.section-separator { width: 80%; height: 3px; background-color: #fff; margin: 0 auto; }
 
-/* === SECTION 1: BLUE DIV + PARAGRAPH === */
+/* SECTION 1 */
 .section1 {
   position: relative;
   width: 100%;
@@ -157,92 +145,46 @@ header.visible { opacity:1; } /* will appear after first section */
 }
 #bigBlue {
   width: clamp(400px, 80vw, 800px);
-  height: calc(clamp(400px, 80vw, 800px) * 11 / 24); /* maintain aspect ratio */
+  height: auto;
   background-image:url(/lpk.png);
   background-size: contain;
   background-repeat: no-repeat;
-  transform: scale(0.5);
   opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.5);
   transition: transform 1.5s ease, opacity 1.5s ease;
+  z-index: 500;
 }
-
 #section1Text {
   max-width:600px;
   text-align:center;
   font-size:1.2rem;
   opacity:0;
-  transition: opacity 1s ease, transform 1s ease;
   transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
 }
 
 /* Section 2 */
-.section2 { 
-  display:flex; flex-direction:column; justify-content:center; 
-  padding:60px 10%; text-align:center; 
-}
-.section2 .info-boxes { 
-  display:flex; justify-content:space-around; flex-wrap:wrap; gap:30px; 
-}
-.info-box { 
-  background:rgba(255,215,0,0.15); border-radius:10px; padding:20px; width:250px; 
-  opacity:0; transform:translateY(30px); 
-  transition:transform 0.6s ease, opacity 0.6s ease, box-shadow 0.3s ease;
-}
+.section2 { display:flex; flex-direction:column; justify-content:center; padding:60px 10%; text-align:center; }
+.section2 .info-boxes { display:flex; justify-content:space-around; flex-wrap:wrap; gap:30px; }
+.info-box { background:rgba(255,215,0,0.15); border-radius:10px; padding:20px; width:250px; opacity:0; transform:translateY(30px); transition:transform 0.6s ease, opacity 0.6s ease, box-shadow 0.3s ease; }
 .info-box.visible { opacity:1; transform:translateY(0); }
 .info-box:hover { transform: scale(1.08); box-shadow: 0 10px 30px rgba(255,215,0,0.3); }
 .info-box img { width:100%; height:150px; border-radius:8px; object-fit:cover; margin-bottom:10px; transition: transform 0.5s ease; }
 .info-box:hover img { transform: scale(1.1); }
 
-/* Section 3 */
-.section3 { min-height:50vh; display:flex; align-items:center; justify-content:center; font-size:24px; padding: 70px; }
+/* Sections 3-5 and footer remain the same */
+.section3 { min-height:50vh; display:flex; align-items:center; justify-content:center; font-size:24px; padding:70px; }
 .section3 a { color:#FFD700; text-decoration:underline; cursor:pointer; }
-
-/* Section 4 */
 .section4 { min-height:80vh; display:flex; align-items:center; justify-content:center; font-size:28px; font-weight:bold; }
-
-/* Section 5 */
-.section5 {
-  height: 700px;
-  position:relative;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-}
-#spin {
-  background-image: url(/pzaytoun.jpg);
-  background-repeat: repeat-x;
-  background-size: contain;
-  height: 90px;
-  width: 100%;
-  position: absolute;
-  bottom: 565px;
-  left: 0;
-  z-index: 1;
-  animation: scrollLeft 15s linear infinite;
-}
-#div {
-  background-image: url(/palestine.jpg);
-  background-repeat: repeat-x;
-  background-size: contain;
-  width: 100%;
-  height: 700px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  z-index: 0;
-}
-@keyframes scrollLeft {
-  from { background-position-x: 0; }
-  to { background-position-x: -100%; }
-}
-
-/* Footer */
+.section5 { height:700px; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; flex-direction:column; }
+#spin { background-image: url(/pzaytoun.jpg); background-repeat: repeat-x; background-size: contain; height: 90px; width: 100%; position: absolute; bottom: 565px; left: 0; z-index: 1; animation: scrollLeft 15s linear infinite; }
+#div { background-image: url(/palestine.jpg); background-repeat: repeat-x; background-size: contain; width: 100%; height: 700px; position: absolute; bottom: 0; left: 0; z-index: 0; }
+@keyframes scrollLeft { from { background-position-x: 0; } to { background-position-x: -100%; } }
 footer { background:#0044cc; color:#fff; text-align:center; padding:40px 20px; font-size:20px; letter-spacing:1px; opacity:0; transition:opacity 1.2s ease; }
 footer.visible { opacity:1; }
-
-/* Scrollbar */
 body.show-scrollbar::-webkit-scrollbar { width:12px; }
 body.show-scrollbar::-webkit-scrollbar-track { background:rgba(180,180,180,0.1); border-radius:20px; }
 body.show-scrollbar::-webkit-scrollbar-thumb { background:rgba(180,180,180,0.5); border-radius:20px; }
@@ -255,17 +197,13 @@ body.show-scrollbar { scrollbar-width:thin; scrollbar-color:rgba(180,180,180,0.5
 <!-- Preloader -->
 <div id="preloader">
   <div class="loader">
-    <svg class="circular" viewBox="25 25 50 50">
-      <circle class="path" cx="50" cy="50" r="20"/>
-    </svg>
+    <svg class="circular" viewBox="25 25 50 50"><circle class="path" cx="50" cy="50" r="20"/></svg>
     <div id="loadingMessage">Starting...</div>
   </div>
 </div>
 
 <!-- Welcome Text -->
 <div id="welcomeText"></div>
-
-<!-- Floating "Welcome to LPK26" -->
 <div id="floatingWelcome"></div>
 
 <!-- Header -->
@@ -275,31 +213,20 @@ body.show-scrollbar { scrollbar-width:thin; scrollbar-color:rgba(180,180,180,0.5
     <span class="title-item">Yearbook</span>
     <span class="title-item">Contact</span>
   </div>
-  <div class="menu" id="hamburger">
-    <span></span><span></span><span></span>
-  </div>
+  <div class="menu" id="hamburger"><span></span><span></span><span></span></div>
 </header>
 
-<!-- Dropdown Nav -->
 <div class="nav-links" id="navLinks">
-  <ul>
-    <li>Gallery</li>
-    <li>Yearbook</li>
-    <li>Contact</li>
-  </ul>
+  <ul><li>Gallery</li><li>Yearbook</li><li>Contact</li></ul>
 </div>
 
-<!-- Main Content -->
 <div id="mainContent">
-
-  <!-- SECTION 1 -->
   <section class="section1">
     <div id="bigBlue"></div>
     <div id="section1Text">Four years.<br>Four years of hard work and endless labor,<br>of challenges faced and lessons learned.<br>Four years of late nights, early mornings, and moments that tested our determination—<br>but also shaped our character.<br>Four years of overcoming hardships,<br>pushing ourselves beyond limits,<br>and discovering what we are truly capable of.<br>Four years of laughter, shared memories,<br>and unwavering support from friends who became family—<br>not by blood, but by a bond stronger than any grade or class.<br>This is our journey at Lycée Pilote Kasserine: a journey of growth, resilience, and unity,<br>marking the culmination of our baccalauréat and the beginning of everything that lies ahead.</div>
   </section>
   <div class="section-separator"></div>
 
-  <!-- SECTION 2 -->
   <section class="section2">
     <h2>Our Highlights</h2>
     <div class="info-boxes">
@@ -310,106 +237,72 @@ body.show-scrollbar { scrollbar-width:thin; scrollbar-color:rgba(180,180,180,0.5
   </section>
   <div class="section-separator"></div>
 
-  <!-- SECTION 3 -->
   <section class="section3">
     <p>Curious to know more? <a href="#">Click here</a> to discover.</p>
   </section>
   <div class="section-separator"></div>
 
-  <!-- SECTION 4 -->
-  <section class="section4">
-    <p>Comments section placeholder</p>
-  </section>
+  <section class="section4"><p>Comments section placeholder</p></section>
 
-  <!-- SECTION 5 -->
   <section class="section5">
     <div id="spin"></div>
     <div id="div"></div>
   </section>
 </div>
 
-<!-- Footer -->
-<footer id="footer">
-  <p>Goodbye — see you again soon 💙</p>
-</footer>
+<footer id="footer"><p>Goodbye — see you again soon 💙</p></footer>
 
 <script>
 /* Preloader + Welcome Animation */
 const messages = ["Loading memories...","Reconstructing faces...","Recovering lost light...","Capturing moments...","Almost there..."];
 const messageElement=document.getElementById('loadingMessage');let index=0;
 const interval=setInterval(()=>{messageElement.textContent=messages[index];index++;
-if(index>=messages.length){clearInterval(interval);
-setTimeout(()=>{const preloader=document.getElementById('preloader');
-preloader.style.opacity='0';setTimeout(()=>{preloader.style.display='none';showWelcomeText();},500);},500);}},1000);
+if(index>=messages.length){clearInterval(interval);setTimeout(()=>{const preloader=document.getElementById('preloader');preloader.style.opacity='0';setTimeout(()=>{preloader.style.display='none';showWelcomeText();},500);},500);}},1000);
 
 function showWelcomeText(){
 const welcomeContainer=document.getElementById('welcomeText');
 const textLines=["LYCEE","PILOTE","KASSERINE","WELCOMES","YOU"];
 welcomeContainer.innerHTML='';
 textLines.forEach((line)=>{const lineDiv=document.createElement('div');lineDiv.className='welcome-line';
-line.split('').forEach((char,i)=>{const span=document.createElement('span');
-span.textContent=char===' '?'\u00A0':char;span.style.animationDelay=`${i*0.05}s`;lineDiv.appendChild(span);});
-welcomeContainer.appendChild(lineDiv);});
+line.split('').forEach((char,i)=>{const span=document.createElement('span'); span.textContent=char===' '?'\u00A0':char; span.style.animationDelay=`${i*0.05}s`; lineDiv.appendChild(span);}); welcomeContainer.appendChild(lineDiv);});
 welcomeContainer.style.opacity=1;
 const totalAnimationTime=textLines.join('').length*0.05*1000+800;
-setTimeout(()=>{welcomeContainer.style.opacity=0;
-setTimeout(()=>{
+setTimeout(()=>{welcomeContainer.style.opacity=0; setTimeout(()=>{
   document.getElementById('mainContent').style.opacity=1;
   document.getElementById('footer').classList.add('visible');
   document.body.style.overflowY='scroll';
   document.body.classList.add('show-scrollbar');
   document.getElementById('floatingWelcome').style.opacity='1';
 
-  // Animate first section blue div and paragraph with slide up
-  const blueDiv = document.getElementById('bigBlue');
-  const sectionText = document.getElementById('section1Text');
+  const blueDiv=document.getElementById('bigBlue');
+  const sectionText=document.getElementById('section1Text');
 
-  // Step 1: scale up
-  setTimeout(()=>{
-    blueDiv.style.opacity = 1;
-    blueDiv.style.transform = 'scale(1)';
-  }, 500);
+  // Step 1: fade in and scale
+  setTimeout(()=>{blueDiv.style.opacity=1; blueDiv.style.transform='translate(-50%, -50%) scale(1)';},500);
 
-  // Step 2: slide up 200px after scaling
-  setTimeout(()=>{
-    blueDiv.style.transform = 'scale(1) translateY(-200px)';
-  }, 2000);
+  // Step 2: slide up by 20% of viewport
+  setTimeout(()=>{ const offset=window.innerHeight*0.2; blueDiv.style.transform=`translate(-50%, calc(-50% - ${offset}px)) scale(1)`; },2000);
 
-  // Step 3: show paragraph after slide up
-  setTimeout(()=>{
-    sectionText.style.opacity = 1;
-    sectionText.style.transform = 'translateY(0)';
-  }, 3000);
+  // Step 3: show paragraph
+  setTimeout(()=>{sectionText.style.opacity=1; sectionText.style.transform='translateY(0)';},3000);
 
-  // Show header after animation
   document.getElementById('topHeader').classList.add('visible');
-},800);
-},totalAnimationTime+1200);
+},800);},totalAnimationTime+1200);
 }
 
 /* Header scroll behavior */
-const topHeader = document.getElementById('topHeader');
-const hamburgerMenu = document.getElementById('hamburger');
-const headerTitles = document.querySelector('.header-titles');
-
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 100) {
-    headerTitles.style.opacity = 0;
-    hamburgerMenu.style.opacity = 1;
-  } else {
-    headerTitles.style.opacity = 1;
-    hamburgerMenu.style.opacity = 0;
-  }
-});
+const topHeader=document.getElementById('topHeader');
+const hamburgerMenu=document.getElementById('hamburger');
+const headerTitles=document.querySelector('.header-titles');
+window.addEventListener('scroll',()=>{ if(window.scrollY>100){headerTitles.style.opacity=0; hamburgerMenu.style.opacity=1;} else {headerTitles.style.opacity=1; hamburgerMenu.style.opacity=0;} });
 
 /* Hamburger Menu */
-const navLinks = document.getElementById('navLinks');
+const navLinks=document.getElementById('navLinks');
 hamburgerMenu.addEventListener('click',()=>{hamburgerMenu.classList.toggle('active');navLinks.classList.toggle('active');});
 
 /* Section2 Box Fade In */
 const boxes=document.querySelectorAll('.info-box');
-window.addEventListener('scroll',()=>{boxes.forEach(box=>{const rect=box.getBoundingClientRect();
-if(rect.top<window.innerHeight-100)box.classList.add('visible');});});
+window.addEventListener('scroll',()=>{boxes.forEach(box=>{const rect=box.getBoundingClientRect();if(rect.top<window.innerHeight-100)box.classList.add('visible');});});
 </script>
 </body>
 </html>
