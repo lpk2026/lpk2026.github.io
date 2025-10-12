@@ -1,42 +1,415 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>...</title>
-<link rel="shortcut icon" href="icon.png" type="image/x-icon">
-<link href="index.css" rel="stylesheet" type="text/css" media="all">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LPK26</title>
+<style>
+body {
+  margin: 0;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  background: #111;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* Preloader */
+#preloader {
+  position: fixed;
+  top:0; left:0;
+  width: 100%; height: 100%;
+  background: #FFFFE7;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  color: black;
+}
+.loader { display:flex; flex-direction:column; align-items:center; }
+.loader svg.circular {
+  animation: rotate 2s linear infinite;
+  height: 50px; width: 50px; margin-bottom: 20px;
+}
+.path {
+  stroke-linecap: round;
+  stroke-width: 4;
+  fill: none;
+  animation: dash 1.5s ease-in-out infinite, colorShift 3s linear infinite;
+}
+@keyframes rotate { 100% { transform: rotate(360deg); } }
+@keyframes dash {
+  0% { stroke-dasharray: 1,150; stroke-dashoffset:0; }
+  50% { stroke-dasharray:90,150; stroke-dashoffset:-35; }
+  100% { stroke-dasharray:90,150; stroke-dashoffset:-124; }
+}
+@keyframes colorShift {
+  0% { stroke:red; }
+  33% { stroke:black; }
+  66% { stroke:green; }
+  100% { stroke:red; }
+}
+#loadingMessage { font-size:18px; text-align:center; }
+
+/* Welcome text */
+#welcomeText {
+  position:fixed;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  display:flex; flex-direction:column;
+  align-items:center;
+  opacity:0;
+  transition:opacity 1s ease;
+  z-index:9998;
+  max-width:90%;
+  text-align:center;
+}
+.welcome-line {
+  display:flex; justify-content:center; flex-wrap:wrap;
+  line-height:1.2;
+  font-size:clamp(18px,6vw,42px);
+}
+#welcomeText span {
+  opacity:0;
+  transform:translateY(30px);
+  display:inline-block;
+  margin:0 2px;
+  animation:fadeUp 0.8s forwards;
+}
+@keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
+
+/* Floating "Welcome to LPK26" */
+#floatingWelcome {
+  position: fixed;
+  top: 15px;
+  width: 100%;
+  text-align: center;
+  font-size: 1.4rem;
+  color: #FFD700;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  z-index: 700;
+}
+
+/* === HEADER === */
+header {
+  position:fixed;
+  top:0; left:0;
+  width:100%;
+  height:60px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 20px;
+  color:#000;
+  box-shadow:none;
+  z-index:900;
+  opacity:0; /* hidden initially */
+  transition: opacity 0.6s ease;
+}
+header.visible { opacity:1; } /* will appear after first section */
+.header-titles {
+  display:flex; gap:30px;
+  font-size:1.2rem;
+  transition: opacity 0.5s ease;
+}
+.title-item { cursor:pointer; }
+.menu {
+  width:30px; height:22px; position:relative; cursor:pointer; transition:opacity 0.5s ease;
+  opacity:0; /* hidden initially */
+}
+.menu span { position:absolute; height:3px; width:100%; background:#fff; border-radius:3px; left:0; transition:all 0.3s ease; }
+.menu span:nth-child(1){ top:0; }
+.menu span:nth-child(2){ top:9px; }
+.menu span:nth-child(3){ top:18px; }
+.menu.active span:nth-child(1){ transform:rotate(45deg); top:9px; }
+.menu.active span:nth-child(2){ opacity:0; }
+.menu.active span:nth-child(3){ transform:rotate(-45deg); top:9px; }
+
+/* Dropdown menu */
+.nav-links { position:fixed; top:60px; right:0; width:200px; background:rgba(255,255,255,0.95); color:#000; box-shadow:0 2px 10px rgba(0,0,0,0.1); transform:translateY(-20px); opacity:0; transition:opacity 0.4s ease, transform 0.4s ease; border-bottom-left-radius:10px; z-index:800; }
+.nav-links.active { transform:translateY(0); opacity:1; }
+
+/* Main Content */
+#mainContent { opacity:0; transition:opacity 1s ease; font-size:24px; }
+
+/* Section separator line */
+.section-separator {
+  width: 80%;
+  height: 3px;
+  background-color: #fff;
+  margin: 0 auto;
+}
+
+/* === SECTION 1: BLUE DIV + PARAGRAPH === */
+.section1 {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:20px;
+  overflow: hidden;
+  background:#fff;
+  color: #000;
+}
+#bigBlue {
+  width: clamp(200px, 50vw, 700px);
+  height: calc(clamp(200px, 50vw, 700px) * 11 / 24); /* maintain aspect ratio */
+  background-image:url(/lpk.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform: scale(0.5);
+  opacity: 0;
+  transition: transform 1.5s ease, opacity 1.5s ease;
+}
+
+#section1Text {
+  max-width:600px;
+  text-align:center;
+  font-size:1.2rem;
+  opacity:0;
+  transition: opacity 1s ease, transform 1s ease;
+  transform: translateY(20px);
+}
+
+/* Section 2 */
+.section2 { 
+  display:flex; flex-direction:column; justify-content:center; 
+  padding:60px 10%; text-align:center; 
+}
+.section2 .info-boxes { 
+  display:flex; justify-content:space-around; flex-wrap:wrap; gap:30px; 
+}
+.info-box { 
+  background:rgba(255,215,0,0.15); border-radius:10px; padding:20px; width:250px; 
+  opacity:0; transform:translateY(30px); 
+  transition:transform 0.6s ease, opacity 0.6s ease, box-shadow 0.3s ease;
+}
+.info-box.visible { opacity:1; transform:translateY(0); }
+.info-box:hover { transform: scale(1.08); box-shadow: 0 10px 30px rgba(255,215,0,0.3); }
+.info-box img { width:100%; height:150px; border-radius:8px; object-fit:cover; margin-bottom:10px; transition: transform 0.5s ease; }
+.info-box:hover img { transform: scale(1.1); }
+
+/* Section 3 */
+.section3 { min-height:50vh; display:flex; align-items:center; justify-content:center; font-size:24px; padding: 70px; }
+.section3 a { color:#FFD700; text-decoration:underline; cursor:pointer; }
+
+/* Section 4 */
+.section4 { min-height:80vh; display:flex; align-items:center; justify-content:center; font-size:28px; font-weight:bold; }
+
+/* Section 5 */
+.section5 {
+  height: 700px;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+}
+#spin {
+  background-image: url(/pzaytoun.jpg);
+  background-repeat: repeat-x;
+  background-size: contain;
+  height: 90px;
+  width: 100%;
+  position: absolute;
+  bottom: 565px;
+  left: 0;
+  z-index: 1;
+  animation: scrollLeft 15s linear infinite;
+}
+#div {
+  background-image: url(/palestine.jpg);
+  background-repeat: repeat-x;
+  background-size: contain;
+  width: 100%;
+  height: 700px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+}
+@keyframes scrollLeft {
+  from { background-position-x: 0; }
+  to { background-position-x: -100%; }
+}
+
+/* Footer */
+footer { background:#0044cc; color:#fff; text-align:center; padding:40px 20px; font-size:20px; letter-spacing:1px; opacity:0; transition:opacity 1.2s ease; }
+footer.visible { opacity:1; }
+
+/* Scrollbar */
+body.show-scrollbar::-webkit-scrollbar { width:12px; }
+body.show-scrollbar::-webkit-scrollbar-track { background:rgba(180,180,180,0.1); border-radius:20px; }
+body.show-scrollbar::-webkit-scrollbar-thumb { background:rgba(180,180,180,0.5); border-radius:20px; }
+body.show-scrollbar::-webkit-scrollbar-thumb:hover { background:rgba(180,180,180,0.7); }
+body.show-scrollbar { scrollbar-width:thin; scrollbar-color:rgba(180,180,180,0.5) rgba(180,180,180,0.1); }
+</style>
 </head>
 <body>
-<div id="darkness">
+
+<!-- Preloader -->
+<div id="preloader">
+  <div class="loader">
+    <svg class="circular" viewBox="25 25 50 50">
+      <circle class="path" cx="50" cy="50" r="20"/>
+    </svg>
+    <div id="loadingMessage">Starting...</div>
+  </div>
 </div>
-<div id="flower">
-<img src="flower.png" title="all you who enter, tread softly. this place is built on grief." width="500px">
+
+<!-- Welcome Text -->
+<div id="welcomeText"></div>
+
+<!-- Floating "Welcome to LPK26" -->
+<div id="floatingWelcome"></div>
+
+<!-- Header -->
+<header id="topHeader">
+  <div class="header-titles">
+    <span class="title-item">Gallery</span>
+    <span class="title-item">Yearbook</span>
+    <span class="title-item">Contact</span>
+  </div>
+  <div class="menu" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</header>
+
+<!-- Dropdown Nav -->
+<div class="nav-links" id="navLinks">
+  <ul>
+    <li>Gallery</li>
+    <li>Yearbook</li>
+    <li>Contact</li>
+  </ul>
 </div>
-<div id="man">
-ENTRY VII :
-<br>
-<br>the light breaks as the man enter the room.
-<br>white coats the insides of the room, resembling blood in its appearence.
-<br>hell and heaven break loose in the man's chaotic mind, and his eyes never seem to focus on what's in front of him; he's looking blankly at the exit door, contemplating, lost in a maze of his own design.
-<br>he doesn't seem to feel the time flow, he doesn't seem to feel his blood flow.
-<br>hours pass, and his muscles cannot continue to hold the unholy weight of his thoughts, and so every fiber, every tissue in his body starts to tear down.
-<br>yet, the man doesn't mind his own collapsing, and continues to gaze into the abyss.
-<br>the abyss.
-<br>
-<br>he is in fact. the abyss.
-<br>his eyes curse him actively, as the tears start to tear his own face.
-<br>the tears roll down his face, trying to escape the reality of their existence.
-<br>to remember, he is trying.
-<br>to forget, he is avoiding.
-<br>
-<br>he thinks... and the thought will linger on.
-<br>
-<br>damned is man.
-<br>damned is man to think.
-<br>
-<br>and then... the light pierces his heart.
-<br>for a moment, he felt Life blooming in his chest, as Death watches the chaos unleashing in his eyes...
-<br>and then the man died <a href="home.html">in grief</a>.
+
+<!-- Main Content -->
+<div id="mainContent">
+
+  <!-- SECTION 1 -->
+  <section class="section1">
+    <div id="bigBlue"></div>
+    <div id="section1Text">Welcome to our first section. This is a placeholder paragraph for now.</div>
+  </section>
+  <div class="section-separator"></div>
+
+  <!-- SECTION 2 -->
+  <section class="section2">
+    <h2>Our Highlights</h2>
+    <div class="info-boxes">
+      <div class="info-box"><img src="https://via.placeholder.com/250x150?text=Box+1"><p>Section 2 Box 1 description here.</p></div>
+      <div class="info-box"><img src="https://via.placeholder.com/250x150?text=Box+2"><p>Section 2 Box 2 description here.</p></div>
+      <div class="info-box"><img src="https://via.placeholder.com/250x150?text=Box+3"><p>Section 2 Box 3 description here.</p></div>
+    </div>
+  </section>
+  <div class="section-separator"></div>
+
+  <!-- SECTION 3 -->
+  <section class="section3">
+    <p>Curious to know more? <a href="#">Click here</a> to discover.</p>
+  </section>
+  <div class="section-separator"></div>
+
+  <!-- SECTION 4 -->
+  <section class="section4">
+    <p>Comments section placeholder</p>
+  </section>
+
+  <!-- SECTION 5 -->
+  <section class="section5">
+    <div id="spin"></div>
+    <div id="div"></div>
+  </section>
 </div>
-<script src="index.js"></script>
+
+<!-- Footer -->
+<footer id="footer">
+  <p>Goodbye — see you again soon 💙</p>
+</footer>
+
+<script>
+/* Preloader + Welcome Animation */
+const messages = ["Loading memories...","Reconstructing faces...","Recovering lost light...","Capturing moments...","Almost there..."];
+const messageElement=document.getElementById('loadingMessage');let index=0;
+const interval=setInterval(()=>{messageElement.textContent=messages[index];index++;
+if(index>=messages.length){clearInterval(interval);
+setTimeout(()=>{const preloader=document.getElementById('preloader');
+preloader.style.opacity='0';setTimeout(()=>{preloader.style.display='none';showWelcomeText();},500);},500);}},1000);
+
+function showWelcomeText(){
+const welcomeContainer=document.getElementById('welcomeText');
+const textLines=["LYCEE","PILOTE","KASSERINE","WELCOMES","YOU"];
+welcomeContainer.innerHTML='';
+textLines.forEach((line)=>{const lineDiv=document.createElement('div');lineDiv.className='welcome-line';
+line.split('').forEach((char,i)=>{const span=document.createElement('span');
+span.textContent=char===' '?'\u00A0':char;span.style.animationDelay=`${i*0.05}s`;lineDiv.appendChild(span);});
+welcomeContainer.appendChild(lineDiv);});
+welcomeContainer.style.opacity=1;
+const totalAnimationTime=textLines.join('').length*0.05*1000+800;
+setTimeout(()=>{welcomeContainer.style.opacity=0;
+setTimeout(()=>{
+  document.getElementById('mainContent').style.opacity=1;
+  document.getElementById('footer').classList.add('visible');
+  document.body.style.overflowY='scroll';
+  document.body.classList.add('show-scrollbar');
+  document.getElementById('floatingWelcome').style.opacity='1';
+
+  // Animate first section blue div and paragraph with slide up
+  const blueDiv = document.getElementById('bigBlue');
+  const sectionText = document.getElementById('section1Text');
+
+  // Step 1: scale up
+  setTimeout(()=>{
+    blueDiv.style.opacity = 1;
+    blueDiv.style.transform = 'scale(1)';
+  }, 500);
+
+  // Step 2: slide up 200px after scaling
+  setTimeout(()=>{
+    blueDiv.style.transform = 'scale(1) translateY(-200px)';
+  }, 2000);
+
+  // Step 3: show paragraph after slide up
+  setTimeout(()=>{
+    sectionText.style.opacity = 1;
+    sectionText.style.transform = 'translateY(0)';
+  }, 3000);
+
+  // Show header after animation
+  document.getElementById('topHeader').classList.add('visible');
+},800);
+},totalAnimationTime+1200);
+}
+
+/* Header scroll behavior */
+const topHeader = document.getElementById('topHeader');
+const hamburgerMenu = document.getElementById('hamburger');
+const headerTitles = document.querySelector('.header-titles');
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 100) {
+    headerTitles.style.opacity = 0;
+    hamburgerMenu.style.opacity = 1;
+  } else {
+    headerTitles.style.opacity = 1;
+    hamburgerMenu.style.opacity = 0;
+  }
+});
+
+/* Hamburger Menu */
+const navLinks = document.getElementById('navLinks');
+hamburgerMenu.addEventListener('click',()=>{hamburgerMenu.classList.toggle('active');navLinks.classList.toggle('active');});
+
+/* Section2 Box Fade In */
+const boxes=document.querySelectorAll('.info-box');
+window.addEventListener('scroll',()=>{boxes.forEach(box=>{const rect=box.getBoundingClientRect();
+if(rect.top<window.innerHeight-100)box.classList.add('visible');});});
+</script>
 </body>
 </html>
