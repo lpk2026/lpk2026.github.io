@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LPK26</title>
 <style>
+html {
+  scroll-behavior: smooth;
+}
 body {
   margin: 0;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -106,6 +109,8 @@ header {
   z-index:900;
   opacity:0;
   transition: opacity 0.6s ease;
+  text-decoration: none;
+  
 }
 header.visible { opacity:1; }
 .header-titles { display:flex; gap:30px; font-size:1.2rem; transition: opacity 0.5s ease; }
@@ -170,16 +175,51 @@ header.visible { opacity:1; }
 
 /* Section 2 */
 .section2 { display:flex; flex-direction:column; justify-content:center; padding:60px 10%; text-align:center; }
-.section2 .info-boxes { display:flex; justify-content:space-around; flex-wrap:wrap; gap:30px; }
-.info-box { background:rgba(255,215,0,0.15); border-radius:10px; padding:20px; width:250px; opacity:0; transform:translateY(30px); transition:transform 0.6s ease, opacity 0.6s ease, box-shadow 0.3s ease; }
-.info-box.visible { opacity:1; transform:translateY(0); }
-.info-box:hover { transform: scale(1.08); box-shadow: 0 10px 30px rgba(255,215,0,0.3); }
-.info-box img { width:100%; height:150px; border-radius:8px; object-fit:cover; margin-bottom:10px; transition: transform 0.5s ease; }
-.info-box:hover img { transform: scale(1.1); }
+.section2 .info-boxes { 
+  display:flex; 
+  justify-content:space-around; 
+  flex-wrap:wrap; 
+  gap:30px; 
+  user-select: none;
+  cursor: pointer;
+}
+
+.info-box { 
+  background: rgba(220,50,50,0.15); /* changed from gold to soft red */ 
+  border-radius:10px; 
+  padding:20px; 
+  width:250px; 
+  opacity:0; 
+  transform:translateY(30px); 
+  transition: transform 0.6s ease, opacity 0.6s ease, box-shadow 0.3s ease; 
+}
+
+.info-box.visible { 
+  opacity:1; 
+  transform:translateY(0); 
+}
+
+.info-box:hover { 
+  transform: scale(1.08); 
+  box-shadow: 0 10px 30px rgba(220,50,50,0.3); /* reddish shadow */ 
+}
+
+.info-box img { 
+  width:100%; 
+  height:150px; 
+  border-radius:8px; 
+  object-fit:cover; 
+  margin-bottom:10px; 
+  transition: transform 0.5s ease; 
+}
+
+.info-box:hover img { 
+  transform: scale(1.1); 
+}
 
 /* Sections 3-5 and footer remain the same */
-.section3 { min-height:50vh; display:flex; align-items:center; justify-content:center; font-size:24px; padding:70px; }
-.section3 a { color:#FFD700; text-decoration:underline; cursor:pointer; }
+.section3 { min-height:25vh; display:flex; align-items:center; justify-content:center; font-size:24px; padding:70px; }
+.section3 a { color:rgb(193, 47, 47); text-decoration:none; cursor:pointer; }
 .section4 { min-height:80vh; display:flex; align-items:center; justify-content:center; font-size:28px; font-weight:bold; }
 .section5 { height:700px; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; flex-direction:column; }
 #spin { background-image: url(/pzaytoun.jpg); background-repeat: repeat-x; background-size: contain; height: 90px; width: 100%; position: absolute; bottom: 565px; left: 0; z-index: 1; animation: scrollLeft 15s linear infinite; }
@@ -211,15 +251,19 @@ body.show-scrollbar { scrollbar-width:thin; scrollbar-color:rgba(180,180,180,0.5
 <!-- Header -->
 <header id="topHeader">
   <div class="header-titles">
-    <span class="title-item">Gallery</span>
-    <span class="title-item">Yearbook</span>
-    <span class="title-item">Contact</span>
+    <span class="title-item"><a href="#gallery">Gallery</a></span>
+    <span class="title-item" ><a href="#yearbook">Yearbook</a></span>
+    <span class="title-item"><a href="#contact">Contact</a></span>
   </div>
   <div class="menu" id="hamburger"><span></span><span></span><span></span></div>
 </header>
 
 <div class="nav-links" id="navLinks">
-  <ul><li>Gallery</li><li>Yearbook</li><li>Contact</li></ul>
+<a href="#gallery" style="text-decoration: none;">Gallery</a>
+<br>
+<a href="#yearbook" style="text-decoration: none;">Yearbook</a>
+<br>
+<a href="#gallery" style="text-decoration: none;">Contact</a>
 </div>
 
 <div id="mainContent">
@@ -229,18 +273,20 @@ body.show-scrollbar { scrollbar-width:thin; scrollbar-color:rgba(180,180,180,0.5
   </section>
 
 
-  <section class="section2">
+  <section class="section2" id="gallery">
     <h2>Our Highlights</h2>
     <div class="info-boxes">
-      <div class="info-box"><img src="https://via.placeholder.com/250x150?text=Box+1"><p>Section 2 Box 1 description here.</p></div>
-      <div class="info-box"><img src="https://via.placeholder.com/250x150?text=Box+2"><p>Section 2 Box 2 description here.</p></div>
-      <div class="info-box"><img src="https://via.placeholder.com/250x150?text=Box+3"><p>Section 2 Box 3 description here.</p></div>
+      <div class="info-box"><img src="https://via.placeholder.com/250x150?text=Box+1"><p>Visit the memories of 4 Science 1</p></div>
+      <div class="info-box"><img src="https://via.placeholder.com/250x150?text=Box+2"><p>Visit the memories of 4 Science 2</p></div>
+      <div class="info-box"><img src="https://via.placeholder.com/250x150?text=Box+3"><p>Visit the memories of 4 Math 1</p></div>
+      <div class="info-box"><img src="https://via.placeholder.com/250x150?text=Box+2"><p>Visit the memories of 4 Math 2</p></div>
+      <div class="info-box"><img src="https://via.placeholder.com/250x150?text=Box+3"><p>Visit the memories of 4 Tech</p></div>
     </div>
   </section>
   <div class="section-separator"></div>
 
-  <section class="section3">
-    <p>Curious to know more? <a href="#">Click here</a> to discover.</p>
+  <section class="section3" id="yearbook">
+    <p>Searching for our yearbook?<br><a href="yearbook_lpk2026.pdf">Click here</a> to get yourself a copy!</p>
   </section>
   <div class="section-separator"></div>
 
