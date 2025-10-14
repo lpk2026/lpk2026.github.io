@@ -753,17 +753,42 @@ sections.forEach(section => {
   observer.observe(section);
 });
 
-// Drag/touch/wheel for sliders
-document.querySelectorAll('.slider').forEach(slider => {
+document.querySelectorAll('.slider-wrapper').forEach(wrapper => {
   let isDown = false, startX, scrollLeft;
-  slider.addEventListener('mousedown', e => { isDown=true; startX=e.pageX-slider.offsetLeft; scrollLeft=slider.scrollLeft; });
-  slider.addEventListener('mouseleave', ()=>isDown=false);
-  slider.addEventListener('mouseup', ()=>isDown=false);
-  slider.addEventListener('mousemove', e=>{ if(!isDown) return; e.preventDefault(); slider.scrollLeft = scrollLeft - (e.pageX-startX); });
-  slider.addEventListener('touchstart', e=>{ startX=e.touches[0].pageX-slider.offsetLeft; scrollLeft=slider.scrollLeft; });
-  slider.addEventListener('touchmove', e=>{ slider.scrollLeft = scrollLeft - (e.touches[0].pageX-startX); });
-  slider.addEventListener('wheel', e=>{ e.preventDefault(); slider.scrollLeft+=e.deltaY; });
+
+  wrapper.addEventListener('mousedown', e => {
+    isDown = true;
+    startX = e.pageX - wrapper.offsetLeft;
+    scrollLeft = wrapper.scrollLeft;
+    wrapper.style.cursor = 'grabbing';
+  });
+  wrapper.addEventListener('mouseleave', () => { isDown = false; wrapper.style.cursor = 'grab'; });
+  wrapper.addEventListener('mouseup', () => { isDown = false; wrapper.style.cursor = 'grab'; });
+  wrapper.addEventListener('mousemove', e => {
+    if(!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - wrapper.offsetLeft;
+    const walk = (x - startX) * 1; // drag speed multiplier
+    wrapper.scrollLeft = scrollLeft - walk;
+  });
+
+  // Touch support
+  wrapper.addEventListener('touchstart', e => {
+    startX = e.touches[0].pageX - wrapper.offsetLeft;
+    scrollLeft = wrapper.scrollLeft;
+  });
+  wrapper.addEventListener('touchmove', e => {
+    const x = e.touches[0].pageX - wrapper.offsetLeft;
+    wrapper.scrollLeft = scrollLeft - (x - startX);
+  });
+
+  // Optional: mouse wheel horizontal scroll
+  wrapper.addEventListener('wheel', e => {
+    e.preventDefault();
+    wrapper.scrollLeft += e.deltaY;
+  });
 });
+
 
 // Fade-in slides individually
 document.querySelectorAll('.slider-wrapper').forEach(wrapper => {
