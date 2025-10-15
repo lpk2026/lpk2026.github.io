@@ -394,8 +394,84 @@ color: rgb(193,47,47);
 
 
 /* Section 3*/
-.section3 { min-height:25vh; display:flex; align-items:center; justify-content:center; font-size:24px; padding:70px; }
-.section3 a { color:rgb(193, 47, 47); text-decoration:none; cursor:pointer; }
+.section3 { min-height:25vh; display:flex; align-items:center; justify-content:center; background-color: #111;}
+/* === YEARBOOK SECTION === */
+.yearbook-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transform: translateX(-80px);
+  opacity: 0;
+  transition: opacity 1.2s ease, transform 1.2s ease;
+  background-color: #111;
+}
+
+.slider-section.visible .yearbook-wrapper {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Flip title to right side */
+.right-title {
+  order: 2;
+  transform: rotate(180deg);
+  writing-mode: vertical-rl;
+  color: #fff;
+  background-color: #111;
+}
+
+/* Content layout */
+.yearbook-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex: 1;
+  padding: 20px;
+  gap: 40px;
+  color:#fff;
+}
+
+/* A4 Placeholder */
+.a4-placeholder {
+  height: calc(50vh - 40px);
+  aspect-ratio: 1 / 1.414; /* A4 ratio */
+  background: #222;
+  border: 2px dashed #555;
+  border-radius: 8px;
+}
+
+/* Yearbook paragraph for small screens */
+#yearbookTextMobile {
+  display: none; /* hidden by default */
+  text-align: center;
+  padding: 40px 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s ease, transform 1s ease;
+  background-color: #ff2b2b;
+}
+
+#yearbookTextMobile.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 900px) {
+  /* Hide original paragraph inside yearbook content */
+  .yearbook-content p {
+    display: none;
+  }
+
+  /* Show mobile text section */
+  #yearbookTextMobile {
+    display: block;
+  }
+}
+
 
 
 .video-card {
@@ -645,9 +721,34 @@ the end of our trial will be triumph.
   </section>
 </section>
 
+<div id="yearbookTextMobile">
+  Four years.<br>
+  Four years of hard work and endless labor,<br>
+  of challenges faced and lessons learned.<br>
+  Four years of laughter, shared memories, and unwavering support from friends who became family.<br>
+  This is our journey at Lycée Pilote Kasserine: a journey of growth, resilience, and unity.
+</div>
 
   <section class="section3" id="yearbook">
-    <p>Searching for our yearbook?<br><a href="yearbook_lpk2026.pdf">Click here</a> to get yourself a copy!</p>
+<!-- Mobile paragraph for small screens -->
+
+
+<section class="slider-section" id="yearbookSection">
+  <div class="slider-wrapper yearbook-wrapper">
+    <div class="yearbook-content">
+      <div class="a4-placeholder"></div>
+      <p>
+        Four years.<br>
+        Four years of hard work and endless labor,<br>
+        of challenges faced and lessons learned.<br>
+        Four years of laughter, shared memories, and unwavering support from friends who became family.<br>
+        This is our journey at Lycée Pilote Kasserine: a journey of growth, resilience, and unity.
+      </p>
+    </div>
+  </div>
+  <div class="slider-title right-title">YEARBOOK</div>
+</section>
+</section>
   </section>
   <div class="section-separator"></div>
 
