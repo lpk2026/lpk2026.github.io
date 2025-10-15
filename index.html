@@ -218,26 +218,19 @@ color: rgb(193,47,47);
 /* Section 2 */
 .section2 { display:flex; flex-direction:column; justify-content:center;  text-align:center; }
 
+/* === SECTION CONTAINER === */
 .slider-section {
-  width: 100%;
+  width: 100vw;
   height: 50vh;
   display: flex;
   background: #111;
   color: #fff;
   overflow: hidden;
-  opacity: 0;
-  transform: translateX(20px); /* small slide */
-  transition: opacity 1s ease, transform 1s ease;
-  margin: 0; /* no vertical gap */
+  margin: 0;
+  position: relative;
 }
 
-.slider-section.visible {
-  opacity: 1;
-  transform: translateX(0); /* slides into place */
-}
-
-
-/* Vertical title */
+/* === TITLE === */
 .slider-title {
   width: 120px;
   writing-mode: vertical-rl;
@@ -247,10 +240,17 @@ color: rgb(193,47,47);
   display: flex;
   justify-content: center;
   align-items: center;
+  background: #222;
   font-family: 'casagrande';
+  opacity: 0;
+  transition: opacity 1.2s ease;
 }
 
-/* Slider wrapper */
+.slider-section.visible .slider-title {
+  opacity: 1;
+}
+
+/* === SLIDER WRAPPER === */
 .slider-wrapper {
   flex: 1;
   overflow-x: auto;
@@ -259,22 +259,30 @@ color: rgb(193,47,47);
   scroll-behavior: smooth;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  opacity: 0;
+  transform: translateX(80px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
 }
 
 .slider-wrapper::-webkit-scrollbar {
   display: none;
 }
 
-/* Slider container */
+.slider-section.visible .slider-wrapper {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* === SLIDER === */
 .slider {
   display: flex;
   gap: 20px;
 }
 
-/* Each slide */
+/* === SLIDE === */
 .slide {
   min-width: 250px;
-  height: calc(50vh - 30px);
+  height: 100%;
   flex-shrink: 0;
   background: #333;
   border-radius: 12px;
@@ -286,9 +294,9 @@ color: rgb(193,47,47);
   font-size: 1.2rem;
   color: #fff;
   cursor: pointer;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  /* no fade-in animation anymore */
+  opacity: 1;
+  transform: none;
 }
 
 .slide img {
@@ -738,7 +746,7 @@ hamburgerMenu.addEventListener('click', () => {
 
 /* Section2 Box Fade In */
 
-// Observe sections for fade-in
+// === SECTION ANIMATION OBSERVER ===
 const sections = document.querySelectorAll('.slider-section');
 sections.forEach(section => {
   const observer = new IntersectionObserver(entries => {
@@ -752,61 +760,16 @@ sections.forEach(section => {
   observer.observe(section);
 });
 
-document.querySelectorAll('.slider-wrapper').forEach(wrapper => {
+// === DRAG / TOUCH / SCROLL FOR SLIDERS ===
+document.querySelectorAll('.slider').forEach(slider => {
   let isDown = false, startX, scrollLeft;
-
-  wrapper.addEventListener('mousedown', e => {
-    isDown = true;
-    startX = e.pageX - wrapper.offsetLeft;
-    scrollLeft = wrapper.scrollLeft;
-    wrapper.style.cursor = 'grabbing';
-  });
-  wrapper.addEventListener('mouseleave', () => { isDown = false; wrapper.style.cursor = 'grab'; });
-  wrapper.addEventListener('mouseup', () => { isDown = false; wrapper.style.cursor = 'grab'; });
-  wrapper.addEventListener('mousemove', e => {
-    if(!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - wrapper.offsetLeft;
-    const walk = (x - startX) * 1; // drag speed multiplier
-    wrapper.scrollLeft = scrollLeft - walk;
-  });
-
-  // Touch support
-  wrapper.addEventListener('touchstart', e => {
-    startX = e.touches[0].pageX - wrapper.offsetLeft;
-    scrollLeft = wrapper.scrollLeft;
-  });
-  wrapper.addEventListener('touchmove', e => {
-    const x = e.touches[0].pageX - wrapper.offsetLeft;
-    wrapper.scrollLeft = scrollLeft - (x - startX);
-  });
-
-  // Optional: mouse wheel horizontal scroll
-// Smart wheel scroll: horizontal when sideways, vertical otherwise
-// Improved scroll handling: vertical scroll always smooth, horizontal only when near horizontal
-wrapper.addEventListener('wheel', e => {
-  const horizontalIntent = Math.abs(e.deltaX) > Math.abs(e.deltaY) * 1.5; // must be 50% stronger sideways
-  const canScrollSideways = wrapper.scrollWidth > wrapper.clientWidth;
-
-  // If user scrolls mostly horizontally and there's space to scroll sideways
-  if (horizontalIntent && canScrollSideways) {
-    e.preventDefault();
-    wrapper.scrollLeft += e.deltaX || e.deltaY; // handle both trackpad and wheel
-  }
-  // If at left/right edge, don't block vertical scroll
-});
-
-
-});
-
-
-// Fade-in slides individually
-document.querySelectorAll('.slider-wrapper').forEach(wrapper => {
-  const slides = wrapper.querySelectorAll('.slide');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
-  }, { root: wrapper, threshold: 0.5 });
-  slides.forEach(slide => observer.observe(slide));
+  slider.addEventListener('mousedown', e => { isDown=true; startX=e.pageX-slider.offsetLeft; scrollLeft=slider.scrollLeft; });
+  slider.addEventListener('mouseleave', ()=>isDown=false);
+  slider.addEventListener('mouseup', ()=>isDown=false);
+  slider.addEventListener('mousemove', e=>{ if(!isDown) return; e.preventDefault(); slider.scrollLeft = scrollLeft - (e.pageX-startX); });
+  slider.addEventListener('touchstart', e=>{ startX=e.touches[0].pageX-slider.offsetLeft; scrollLeft=slider.scrollLeft; });
+  slider.addEventListener('touchmove', e=>{ slider.scrollLeft = scrollLeft - (e.touches[0].pageX-startX); });
+  slider.addEventListener('wheel', e=>{ e.preventDefault(); slider.scrollLeft+=e.deltaY; });
 });
 
 /*Section 3 vid*/
