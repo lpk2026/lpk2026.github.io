@@ -223,8 +223,8 @@ color: rgb(193,47,47);
   width: 100vw;
   height: 50vh;
   display: flex;
-  background: #111;
-  color: #fff;
+  background: #EDE8D0;
+  color: #000;
   overflow: hidden;
   margin: 0;
   position: relative;
@@ -305,14 +305,22 @@ color: rgb(193,47,47);
   display: block;
 }
 
-/* SEE MORE button */
 .slide.see-more {
-  background: rgba(255,0,0,0.8);
+  background: transparent;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 1.2rem;
-  font-weight: bold;
+  cursor: pointer;
+  background-color: #111;
+  transition: transform 0.2s ease;
+  font-family: 'casagrande';
+  font-size: 1.5rem;
+  color: #EDE8D0;
+}
+
+.slide.see-more:hover {
+  transform: scale(1.1);
 }
 
 /* Fade-in slides */
@@ -606,7 +614,21 @@ the end of our trial will be triumph.
         </div>
 
         <!-- See More -->
-        <div class="slide see-more">SEE MORE</div>
+        <!-- See More Slide -->
+<div class="slide see-more">
+
+  <svg width="80" height="80" viewBox="0 0 80 80">
+    <!-- Outer circle -->
+    <circle cx="40" cy="40" r="38" stroke="#EDE8D0" stroke-width="2" fill="transparent"/>
+    
+    <!-- Plus sign -->
+    <line x1="40" y1="20" x2="40" y2="60" stroke="#EDE8D0" stroke-width="12"/>
+    <line x1="20" y1="40" x2="60" y2="40" stroke="#EDE8D0" stroke-width="12"/>
+  </svg>
+  <br><br>
+    See More
+</div>
+
 
       </div>
     </div>
