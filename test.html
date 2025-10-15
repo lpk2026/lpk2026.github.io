@@ -11,34 +11,30 @@
   font-weight: normal;
   font-style: normal;
 }
+
 body {
   margin: 0;
   font-family: sans-serif;
   background: #111;
   color: #fff;
-  overflow-x: hidden; /* prevents horizontal gap */
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
+/* === SECTION CONTAINER === */
 .slider-section {
-  width: 100%;
+  width: 100vw;
   height: 50vh;
   display: flex;
   background: #111;
   color: #fff;
   overflow: hidden;
-  opacity: 0;
-  transform: translateX(20px); /* small slide */
-  transition: opacity 1s ease, transform 1s ease;
-  margin: 0; /* no vertical gap */
+  margin: 0;
+  position: relative;
 }
 
-.slider-section.visible {
-  opacity: 1;
-  transform: translateX(0); /* slides into place */
-}
-
-
-/* Vertical title */
+/* === TITLE === */
 .slider-title {
   width: 120px;
   writing-mode: vertical-rl;
@@ -50,9 +46,15 @@ body {
   align-items: center;
   background: #222;
   font-family: 'casagrande';
+  opacity: 0;
+  transition: opacity 1.2s ease;
 }
 
-/* Slider wrapper */
+.slider-section.visible .slider-title {
+  opacity: 1;
+}
+
+/* === SLIDER WRAPPER === */
 .slider-wrapper {
   flex: 1;
   overflow-x: auto;
@@ -61,22 +63,30 @@ body {
   scroll-behavior: smooth;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  opacity: 0;
+  transform: translateX(80px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
 }
 
 .slider-wrapper::-webkit-scrollbar {
   display: none;
 }
 
-/* Slider container */
+.slider-section.visible .slider-wrapper {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* === SLIDER === */
 .slider {
   display: flex;
   gap: 20px;
 }
 
-/* Each slide */
+/* === SLIDE === */
 .slide {
   min-width: 250px;
-  height: calc(50vh - 30px);
+  height: 100%;
   flex-shrink: 0;
   background: #333;
   border-radius: 12px;
@@ -88,9 +98,9 @@ body {
   font-size: 1.2rem;
   color: #fff;
   cursor: pointer;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  /* no fade-in animation anymore */
+  opacity: 1;
+  transform: none;
 }
 
 .slide img {
@@ -109,16 +119,11 @@ body {
   font-size: 1.2rem;
   font-weight: bold;
 }
-
-/* Fade-in slides */
-.slide.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
 </style>
 </head>
 <body>
 
+<!-- === SECTION TEMPLATE === -->
 <section class="slider-section">
   <div class="slider-title">GALLERY 1</div>
   <div class="slider-wrapper">
@@ -133,7 +138,6 @@ body {
   </div>
 </section>
 
-<!-- Repeat for remaining sections (2-5) -->
 <section class="slider-section">
   <div class="slider-title">GALLERY 2</div>
   <div class="slider-wrapper">
@@ -191,7 +195,7 @@ body {
 </section>
 
 <script>
-// Observe sections for fade-in
+// === SECTION ANIMATION OBSERVER ===
 const sections = document.querySelectorAll('.slider-section');
 sections.forEach(section => {
   const observer = new IntersectionObserver(entries => {
@@ -205,7 +209,7 @@ sections.forEach(section => {
   observer.observe(section);
 });
 
-// Drag/touch/wheel for sliders
+// === DRAG / TOUCH / SCROLL FOR SLIDERS ===
 document.querySelectorAll('.slider').forEach(slider => {
   let isDown = false, startX, scrollLeft;
   slider.addEventListener('mousedown', e => { isDown=true; startX=e.pageX-slider.offsetLeft; scrollLeft=slider.scrollLeft; });
@@ -215,15 +219,6 @@ document.querySelectorAll('.slider').forEach(slider => {
   slider.addEventListener('touchstart', e=>{ startX=e.touches[0].pageX-slider.offsetLeft; scrollLeft=slider.scrollLeft; });
   slider.addEventListener('touchmove', e=>{ slider.scrollLeft = scrollLeft - (e.touches[0].pageX-startX); });
   slider.addEventListener('wheel', e=>{ e.preventDefault(); slider.scrollLeft+=e.deltaY; });
-});
-
-// Fade-in slides individually
-document.querySelectorAll('.slider-wrapper').forEach(wrapper => {
-  const slides = wrapper.querySelectorAll('.slide');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
-  }, { root: wrapper, threshold: 0.5 });
-  slides.forEach(slide => observer.observe(slide));
 });
 </script>
 </body>
