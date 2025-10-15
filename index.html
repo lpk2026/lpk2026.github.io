@@ -240,7 +240,6 @@ color: rgb(193,47,47);
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #222;
   font-family: 'casagrande';
   opacity: 0;
   transition: opacity 1.2s ease;
@@ -345,10 +344,9 @@ color: rgb(193,47,47);
   inset: 0;
   z-index: 2;
   opacity: 0.35;
+  background: red;
+  mix-blend-mode: screen;
 }
-
-.overlay.red { background: red; mix-blend-mode: screen; }
-.overlay.white { background: white; mix-blend-mode: overlay; }
 
 .caption {
   position: absolute;
