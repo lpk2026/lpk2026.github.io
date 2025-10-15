@@ -782,10 +782,21 @@ document.querySelectorAll('.slider-wrapper').forEach(wrapper => {
   });
 
   // Optional: mouse wheel horizontal scroll
-  wrapper.addEventListener('wheel', e => {
+// Smart wheel scroll: horizontal when sideways, vertical otherwise
+// Improved scroll handling: vertical scroll always smooth, horizontal only when near horizontal
+wrapper.addEventListener('wheel', e => {
+  const horizontalIntent = Math.abs(e.deltaX) > Math.abs(e.deltaY) * 1.5; // must be 50% stronger sideways
+  const canScrollSideways = wrapper.scrollWidth > wrapper.clientWidth;
+
+  // If user scrolls mostly horizontally and there's space to scroll sideways
+  if (horizontalIntent && canScrollSideways) {
     e.preventDefault();
-    wrapper.scrollLeft += e.deltaY;
-  });
+    wrapper.scrollLeft += e.deltaX || e.deltaY; // handle both trackpad and wheel
+  }
+  // If at left/right edge, don't block vertical scroll
+});
+
+
 });
 
 
