@@ -187,7 +187,7 @@ color: rgb(193,47,47);
   justify-content:center;
   gap:20px;
   overflow: hidden;
-  background:#111;
+  background:#fff;
   color: #000;
 }
 #bigBlue {
@@ -213,7 +213,6 @@ color: rgb(193,47,47);
   transform: translateY(20px);
   transition: opacity 1s ease, transform 1s ease;
   padding: 20px;
-  color: #fff;
 }
 
 /* Section 2 */
@@ -277,11 +276,19 @@ color: rgb(193,47,47);
 .slider {
   display: flex;
   gap: 20px;
+  padding-right: 40px;
 }
+
+.slider::after {
+  content: "";
+  display: block;
+  min-width: 20px; /* acts as end padding */
+}
+
 
 /* === SLIDE === */
 .slide {
-  min-width: 250px;
+  width: clamp(250px,50vw,700px);
   height: 100%;
   flex-shrink: 0;
   background: #333;
@@ -571,7 +578,6 @@ the end of our trial will be triumph.
     <div id="section1Text"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>Four years.<br>Four years of hard work and endless labor,<br>of challenges faced and lessons learned.<br>Four years of late nights, early mornings, and moments that tested our determination, but also shaped our character.<br>Four years of overcoming hardships, pushing ourselves beyond limits, and discovering what we are truly capable of.<br>Four years of laughter, shared memories, and unwavering support from friends who became family—<br>not by blood, but by a bond stronger than any grade or class.<br>This is our journey at Lycée Pilote Kasserine: a journey of growth, resilience, and unity, marking the culmination of our baccalauréat and the beginning of everything that lies ahead.</div>
   </section>
 
- <div class="section-separator"></div>
 <section class="section2" id="events">
   <section class="slider-section">
     <div class="slider-title">EVENTS</div>
