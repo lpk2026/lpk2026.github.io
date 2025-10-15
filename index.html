@@ -232,7 +232,7 @@ color: rgb(193,47,47);
 
 /* === TITLE === */
 .slider-title {
-  width: 120px;
+  width: 100px;
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   font-size: 4rem;
@@ -259,7 +259,7 @@ color: rgb(193,47,47);
   -ms-overflow-style: none;
   scrollbar-width: none;
   opacity: 0;
-  transform: translateX(80px);
+  transform: translateX(100px);
   transition: opacity 1.2s ease, transform 1.2s ease;
 }
 
@@ -293,9 +293,13 @@ color: rgb(193,47,47);
   font-size: 1.2rem;
   color: #fff;
   cursor: pointer;
-  /* no fade-in animation anymore */
+  transition: transform 0.2s ease;
   opacity: 1;
   transform: none;
+}
+
+.slide:hover {
+  transform: scale(1.05);
 }
 
 .slide img {
@@ -320,7 +324,7 @@ color: rgb(193,47,47);
 }
 
 .slide.see-more:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 /* Fade-in slides */
