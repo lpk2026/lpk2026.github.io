@@ -53,7 +53,7 @@
 
 
     .gallery {
-      column-count: 4;
+      column-count: 7;
       column-gap: 15px;
       padding: 0 20px;
     }
@@ -72,24 +72,40 @@
       transform: scale(1.03);
     }
 
-    /* Responsive */
+
+    @media (max-width: 1900px) {
+      .gallery {
+        column-count: 6;
+      }
+    }
+
+
+    @media (max-width: 1600px) {
+      .gallery {
+        column-count: 5;
+      }
+    }
+
+
     @media (max-width: 1200px) {
       .gallery {
-        column-count: 3;
+        column-count: 4;
       }
     }
 
     @media (max-width: 800px) {
       .gallery {
-        column-count: 2;
+        column-count: 3;
       }
     }
 
     @media (max-width: 500px) {
       .gallery {
-        column-count: 1;
+        column-count: 2;
       }
     }
+
+    
 
     /* Lightbox */
     .lightbox {
@@ -211,6 +227,7 @@
 
 <!-- BacSport Section -->
 <h2>BacSport</h2>
+<br>
 <div class="gallery" data-section="bacsport">
   <img src="https://picsum.photos/400/750?random=6" alt="Running" data-description="Sweat, sun, and determination.">
   <img src="https://picsum.photos/400/650?random=7" alt="Victory" data-description="That feeling when you finally finish the race.">
@@ -222,6 +239,7 @@
 
 <!-- Optional: Add more sections -->
 <h2>Graduation</h2>
+<br>
 <div class="gallery" data-section="graduation">
   <img src="https://picsum.photos/400/600?random=21" alt="Caps in Air" data-description="Celebrating the end of an era.">
   <img src="https://picsum.photos/400/550?random=22" alt="Diploma" data-description="The hard work finally paid off.">
