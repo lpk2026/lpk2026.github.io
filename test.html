@@ -1,225 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Multi Slider Sections</title>
-<style>
-@font-face {
-  font-family: 'casagrande';
-  src: url('casagrande.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Gallery</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fafafa;
+      font-family: 'Poppins', sans-serif;
+    }
 
-body {
-  margin: 0;
-  font-family: sans-serif;
-  background: #111;
-  color: #fff;
-  overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-}
+    h1 {
+      text-align: center;
+      padding: 40px 0 10px;
+      color: #333;
+      font-weight: 600;
+    }
 
-/* === SECTION CONTAINER === */
-.slider-section {
-  width: 100vw;
-  height: 50vh;
-  display: flex;
-  background: #111;
-  color: #fff;
-  overflow: hidden;
-  margin: 0;
-  position: relative;
-}
+    h2 {
+      text-align: left;
+      padding: 20px;
+      font-weight: 500;
+      color: #444;
+    }
 
-/* === TITLE === */
-.slider-title {
-  width: 120px;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  font-size: 4rem;
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #222;
-  font-family: 'casagrande';
-  opacity: 0;
-  transition: opacity 1.2s ease;
-}
+    .gallery {
+      column-count: 4;
+      column-gap: 15px;
+      padding: 0 20px;
+    }
 
-.slider-section.visible .slider-title {
-  opacity: 1;
-}
+    .gallery img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      display: block;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      break-inside: avoid;
+    }
 
-/* === SLIDER WRAPPER === */
-.slider-wrapper {
-  flex: 1;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding: 20px;
-  scroll-behavior: smooth;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  opacity: 0;
-  transform: translateX(80px);
-  transition: opacity 1.2s ease, transform 1.2s ease;
-}
+    .gallery img:hover {
+      transform: scale(1.03);
+    }
 
-.slider-wrapper::-webkit-scrollbar {
-  display: none;
-}
+    /* Responsive */
+    @media (max-width: 1200px) { .gallery { column-count: 3; } }
+    @media (max-width: 800px) { .gallery { column-count: 2; } }
+    @media (max-width: 500px) { .gallery { column-count: 1; } }
 
-.slider-section.visible .slider-wrapper {
-  opacity: 1;
-  transform: translateX(0);
-}
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 1000;
+    }
 
-/* === SLIDER === */
-.slider {
-  display: flex;
-  gap: 20px;
-}
+    .lightbox.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
 
-/* === SLIDE === */
-.slide {
-  min-width: 250px;
-  height: 100%;
-  flex-shrink: 0;
-  background: #333;
-  border-radius: 12px;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  font-size: 1.2rem;
-  color: #fff;
-  cursor: pointer;
-  /* no fade-in animation anymore */
-  opacity: 1;
-  transform: none;
-}
+    .lightbox img {
+      max-width: 80%;
+      max-height: 75vh;
+      border-radius: 10px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.6);
+      margin-bottom: 20px;
+      animation: pop 0.3s ease;
+    }
 
-.slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
+    @keyframes pop {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
 
-/* SEE MORE button */
-.slide.see-more {
-  background: rgba(255,0,0,0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-</style>
+    .description {
+      color: #ddd;
+      font-size: 18px;
+      text-align: center;
+      max-width: 80%;
+    }
+
+    .close-btn {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 32px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .arrow {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+      font-size: 40px;
+      cursor: pointer;
+      user-select: none;
+      padding: 20px;
+    }
+
+    .arrow.left { left: 20px; }
+    .arrow.right { right: 20px; }
+
+    .arrow:hover, .close-btn:hover {
+      color: #bbb;
+    }
+  </style>
 </head>
 <body>
 
-<!-- === SECTION TEMPLATE === -->
-<section class="slider-section">
-  <div class="slider-title">GALLERY 1</div>
-  <div class="slider-wrapper">
-    <div class="slider">
-      <div class="slide"><img src="https://via.placeholder.com/300x200?text=1-1" alt="1"></div>
-      <div class="slide"><img src="https://via.placeholder.com/300x200?text=1-2" alt="2"></div>
-      <div class="slide"><img src="https://via.placeholder.com/300x200?text=1-3" alt="3"></div>
-      <div class="slide"><img src="https://via.placeholder.com/300x200?text=1-4" alt="4"></div>
-      <div class="slide"><img src="https://via.placeholder.com/300x200?text=1-5" alt="5"></div>
-      <div class="slide see-more">SEE MORE</div>
-    </div>
-  </div>
-</section>
+  <h1>Memory Gallery 2026</h1>
 
-<section class="slider-section">
-  <div class="slider-title">GALLERY 2</div>
-  <div class="slider-wrapper">
-    <div class="slider">
-      <div class="slide"><img src="https://via.placeholder.com/300x200?text=2-1" alt="1"></div>
-      <div class="slide"><img src="https://via.placeholder.com/300x200?text=2-2" alt="2"></div>
-      <div class="slide"><img src="https://via.placeholder.com/300x200?text=2-3" alt="3"></div>
-      <div class="slide"><img src="https://via.placeholder.com/300x200?text=2-4" alt="4"></div>
-      <div class="slide"><img src="https://via.placeholder.com/300x200?text=2-5" alt="5"></div>
-      <div class="slide see-more">SEE MORE</div>
-    </div>
+  <!-- Prom Section -->
+  <h2>Prom</h2>
+  <div class="gallery" data-section="prom">
+    <img src="https://picsum.photos/400/600?random=1" alt="Prom Night" data-description="Dancing under the lights — a night to remember.">
+    <img src="https://picsum.photos/400/500?random=2" alt="Group Photo" data-description="The class all together — laughter, flash, and forever.">
+    <img src="https://picsum.photos/400/700?random=3" alt="Candid" data-description="Caught between laughter and goodbyes.">
   </div>
-</section>
 
-<section class="slider-section">
-  <div class="slider-title">GALLERY 3</div>
-  <div class="slider-wrapper">
-    <div class="slider">
-      <div class="slide"><img src="https://via.placeholder.com/300x200?text=3-1" alt="1"></div>
-      <div class="slide"><img src="https://via.placeholder.com/300x200?text=3-2" alt="2"></div>
-      <div class="slide"><img src="https://via.placeholder.com/300x200?text=3-3" alt="3"></div>
-      <div class="slide"><img src="https://via.placeholder.com/300x200?text=3-4" alt="4"></div>
-      <div class="slide"><img src="https://via.placeholder.com/300x200?text=3-5" alt="5"></div>
-      <div class="slide see-more">SEE MORE</div>
-    </div>
+  <!-- Ramadhan Section -->
+  <h2>Ramadhan</h2>
+  <div class="gallery" data-section="ramadhan">
+    <img src="https://picsum.photos/400/400?random=4" alt="Iftar" data-description="Breaking fast with friends and stories shared.">
+    <img src="https://picsum.photos/400/550?random=5" alt="Mosque Night" data-description="A calm evening beneath the crescent moon.">
   </div>
-</section>
 
-<section class="slider-section">
-  <div class="slider-title">GALLERY 4</div>
-  <div class="slider-wrapper">
-    <div class="slider">
-      <div class="slide"><img src="https://via.placeholder.com/300x200?text=4-1" alt="1"></div>
-      <div class="slide"><img src="https://via.placeholder.com/300x200?text=4-2" alt="2"></div>
-      <div class="slide"><img src="https://via.placeholder.com/300x200?text=4-3" alt="3"></div>
-      <div class="slide"><img src="https://via.placeholder.com/300x200?text=4-4" alt="4"></div>
-      <div class="slide"><img src="https://via.placeholder.com/300x200?text=4-5" alt="5"></div>
-      <div class="slide see-more">SEE MORE</div>
-    </div>
+  <!-- BacSport Section -->
+  <h2>BacSport</h2>
+  <div class="gallery" data-section="bacsport">
+    <img src="https://picsum.photos/400/750?random=6" alt="Running" data-description="Sweat, sun, and determination.">
+    <img src="https://picsum.photos/400/650?random=7" alt="Victory" data-description="That feeling when you finally finish the race.">
   </div>
-</section>
 
-<section class="slider-section">
-  <div class="slider-title">GALLERY 5</div>
-  <div class="slider-wrapper">
-    <div class="slider">
-      <div class="slide"><img src="https://via.placeholder.com/300x200?text=5-1" alt="1"></div>
-      <div class="slide"><img src="https://via.placeholder.com/300x200?text=5-2" alt="2"></div>
-      <div class="slide"><img src="https://via.placeholder.com/300x200?text=5-3" alt="3"></div>
-      <div class="slide"><img src="https://via.placeholder.com/300x200?text=5-4" alt="4"></div>
-      <div class="slide"><img src="https://via.placeholder.com/300x200?text=5-5" alt="5"></div>
-      <div class="slide see-more">SEE MORE</div>
-    </div>
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <span class="close-btn" id="closeBtn">&times;</span>
+    <span class="arrow left" id="prev">&#10094;</span>
+    <img src="" alt="">
+    <div class="description" id="desc"></div>
+    <span class="arrow right" id="next">&#10095;</span>
   </div>
-</section>
 
-<script>
-// === SECTION ANIMATION OBSERVER ===
-const sections = document.querySelectorAll('.slider-section');
-sections.forEach(section => {
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
+  <script>
+    const galleries = document.querySelectorAll('.gallery');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+    const lightboxDesc = document.getElementById('desc');
+    const closeBtn = document.getElementById('closeBtn');
+    const nextBtn = document.getElementById('next');
+    const prevBtn = document.getElementById('prev');
+
+    let currentImages = [];
+    let currentIndex = 0;
+
+    galleries.forEach(gallery => {
+      const imgs = gallery.querySelectorAll('img');
+      imgs.forEach((img, index) => {
+        img.addEventListener('click', () => {
+          currentImages = Array.from(imgs);
+          currentIndex = index;
+          showImage(currentImages[currentIndex]);
+        });
+      });
     });
-  }, { threshold: 0.2 });
-  observer.observe(section);
-});
 
-// === DRAG / TOUCH / SCROLL FOR SLIDERS ===
-document.querySelectorAll('.slider').forEach(slider => {
-  let isDown = false, startX, scrollLeft;
-  slider.addEventListener('mousedown', e => { isDown=true; startX=e.pageX-slider.offsetLeft; scrollLeft=slider.scrollLeft; });
-  slider.addEventListener('mouseleave', ()=>isDown=false);
-  slider.addEventListener('mouseup', ()=>isDown=false);
-  slider.addEventListener('mousemove', e=>{ if(!isDown) return; e.preventDefault(); slider.scrollLeft = scrollLeft - (e.pageX-startX); });
-  slider.addEventListener('touchstart', e=>{ startX=e.touches[0].pageX-slider.offsetLeft; scrollLeft=slider.scrollLeft; });
-  slider.addEventListener('touchmove', e=>{ slider.scrollLeft = scrollLeft - (e.touches[0].pageX-startX); });
-  slider.addEventListener('wheel', e=>{ e.preventDefault(); slider.scrollLeft+=e.deltaY; });
-});
-</script>
+    function showImage(img) {
+      lightbox.classList.add('active');
+      lightboxImg.src = img.src;
+      lightboxDesc.textContent = img.dataset.description || '';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+    }
+
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % currentImages.length;
+      showImage(currentImages[currentIndex]);
+    }
+
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+      showImage(currentImages[currentIndex]);
+    }
+
+    closeBtn.addEventListener('click', closeLightbox);
+    nextBtn.addEventListener('click', nextImage);
+    prevBtn.addEventListener('click', prevImage);
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'ArrowRight') nextImage();
+      if (e.key === 'ArrowLeft') prevImage();
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+
 </body>
 </html>
