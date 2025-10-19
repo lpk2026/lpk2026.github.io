@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,7 @@
       margin: 0;
       padding: 0;
       background: #fafafa;
-      font-family: 'Poppins', sans-serif;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     }
 
     h1 {
@@ -25,6 +26,31 @@
       font-weight: 500;
       color: #444;
     }
+
+    h2 {
+      position: relative;
+      text-align: left;
+      padding: 20px 20px 10px;
+      font-weight: 500;
+      color: #444;
+      margin: 0;
+    }
+
+    h2::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: calc(100vw - 40px);
+      /* full viewport width */
+      height: 5px;
+      /* line thickness */
+      background: #ddd;
+      /* line color */
+      transform: translateX(20px);
+      /* adjust since we padded h2 by 20px */
+    }
+
 
     .gallery {
       column-count: 4;
@@ -47,15 +73,31 @@
     }
 
     /* Responsive */
-    @media (max-width: 1200px) { .gallery { column-count: 3; } }
-    @media (max-width: 800px) { .gallery { column-count: 2; } }
-    @media (max-width: 500px) { .gallery { column-count: 1; } }
+    @media (max-width: 1200px) {
+      .gallery {
+        column-count: 3;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .gallery {
+        column-count: 2;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .gallery {
+        column-count: 1;
+      }
+    }
 
     /* Lightbox */
     .lightbox {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       background: rgba(0, 0, 0, 0.9);
       display: flex;
       flex-direction: column;
@@ -76,14 +118,21 @@
       max-width: 80%;
       max-height: 75vh;
       border-radius: 10px;
-      box-shadow: 0 0 30px rgba(0,0,0,0.6);
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
       margin-bottom: 20px;
       animation: pop 0.3s ease;
     }
 
     @keyframes pop {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
 
     .description {
@@ -114,39 +163,71 @@
       padding: 20px;
     }
 
-    .arrow.left { left: 20px; }
-    .arrow.right { right: 20px; }
+    .arrow.left {
+      left: 20px;
+    }
 
-    .arrow:hover, .close-btn:hover {
+    .arrow.right {
+      right: 20px;
+    }
+
+    .arrow:hover,
+    .close-btn:hover {
       color: #bbb;
     }
   </style>
 </head>
+
 <body>
 
   <h1>Memory Gallery 2026</h1>
 
   <!-- Prom Section -->
-  <h2>Prom</h2>
-  <div class="gallery" data-section="prom">
-    <img src="https://picsum.photos/400/600?random=1" alt="Prom Night" data-description="Dancing under the lights — a night to remember.">
-    <img src="https://picsum.photos/400/500?random=2" alt="Group Photo" data-description="The class all together — laughter, flash, and forever.">
-    <img src="https://picsum.photos/400/700?random=3" alt="Candid" data-description="Caught between laughter and goodbyes.">
-  </div>
+  <!-- Prom Section -->
+<h2>Prom</h2>
+<br>
+<div class="gallery" data-section="prom">
+  <img src="https://picsum.photos/400/600?random=1" alt="Prom Night" data-description="Dancing under the lights — a night to remember.">
+  <img src="https://picsum.photos/400/500?random=2" alt="Group Photo" data-description="The class all together — laughter, flash, and forever.">
+  <img src="https://picsum.photos/400/700?random=3" alt="Candid" data-description="Caught between laughter and goodbyes.">
+  <img src="https://picsum.photos/400/650?random=8" alt="Selfies" data-description="Memories captured in spontaneous selfies.">
+  <img src="https://picsum.photos/400/550?random=9" alt="Decorations" data-description="The hall lit up with colorful decorations.">
+  <img src="https://picsum.photos/400/600?random=10" alt="Friends" data-description="Sharing laughs and dances with friends.">
+  <img src="https://picsum.photos/400/580?random=11" alt="The Dance Floor" data-description="Everyone on the dance floor, lost in the music.">
+  <img src="https://picsum.photos/400/620?random=12" alt="Awards" data-description="Celebrating achievements and unforgettable moments.">
+</div>
 
-  <!-- Ramadhan Section -->
-  <h2>Ramadhan</h2>
-  <div class="gallery" data-section="ramadhan">
-    <img src="https://picsum.photos/400/400?random=4" alt="Iftar" data-description="Breaking fast with friends and stories shared.">
-    <img src="https://picsum.photos/400/550?random=5" alt="Mosque Night" data-description="A calm evening beneath the crescent moon.">
-  </div>
+<!-- Ramadhan Section -->
+<h2>Ramadhan</h2>
+<br>
+<div class="gallery" data-section="ramadhan">
+  <img src="https://picsum.photos/400/400?random=4" alt="Iftar" data-description="Breaking fast with friends and stories shared.">
+  <img src="https://picsum.photos/400/550?random=5" alt="Mosque Night" data-description="A calm evening beneath the crescent moon.">
+  <img src="https://picsum.photos/400/500?random=13" alt="Decor" data-description="Lanterns glowing softly in the evening.">
+  <img src="https://picsum.photos/400/600?random=14" alt="Family Meal" data-description="Sharing Iftar with loved ones.">
+  <img src="https://picsum.photos/400/550?random=15" alt="Night Market" data-description="The lively energy of the night market.">
+  <img src="https://picsum.photos/400/500?random=16" alt="Prayer Time" data-description="Quiet moments of reflection.">
+</div>
 
-  <!-- BacSport Section -->
-  <h2>BacSport</h2>
-  <div class="gallery" data-section="bacsport">
-    <img src="https://picsum.photos/400/750?random=6" alt="Running" data-description="Sweat, sun, and determination.">
-    <img src="https://picsum.photos/400/650?random=7" alt="Victory" data-description="That feeling when you finally finish the race.">
-  </div>
+<!-- BacSport Section -->
+<h2>BacSport</h2>
+<div class="gallery" data-section="bacsport">
+  <img src="https://picsum.photos/400/750?random=6" alt="Running" data-description="Sweat, sun, and determination.">
+  <img src="https://picsum.photos/400/650?random=7" alt="Victory" data-description="That feeling when you finally finish the race.">
+  <img src="https://picsum.photos/400/600?random=17" alt="Team Spirit" data-description="Cheering for each other in every game.">
+  <img src="https://picsum.photos/400/700?random=18" alt="Basketball" data-description="The ball flying through the hoop.">
+  <img src="https://picsum.photos/400/580?random=19" alt="Soccer" data-description="Teamwork and strategy in motion.">
+  <img src="https://picsum.photos/400/620?random=20" alt="Medal Ceremony" data-description="Pride, smiles, and medals for hard work.">
+</div>
+
+<!-- Optional: Add more sections -->
+<h2>Graduation</h2>
+<div class="gallery" data-section="graduation">
+  <img src="https://picsum.photos/400/600?random=21" alt="Caps in Air" data-description="Celebrating the end of an era.">
+  <img src="https://picsum.photos/400/550?random=22" alt="Diploma" data-description="The hard work finally paid off.">
+  <img src="https://picsum.photos/400/650?random=23" alt="Friends" data-description="Smiles and hugs that last forever.">
+</div>
+
 
   <!-- Lightbox -->
   <div class="lightbox" id="lightbox">
@@ -216,4 +297,5 @@
   </script>
 
 </body>
+
 </html>

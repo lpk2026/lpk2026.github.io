@@ -323,6 +323,7 @@
       position: relative;
     }
 
+
     /* === TITLE === */
     .slider-title {
       width: 120px;
@@ -575,90 +576,156 @@
       display: flex;
     }
 
+      .section4.slider-section {
+      width: 100vw;
+      height: 70vh;
+      display: flex;
+      background: #EDE8D0;
+      color: #000;
+      overflow: hidden;
+      margin: 0;
+      position: relative;
+      
+    }
+
+    .slider-wrapper {
+      flex: 1;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 20px;
+      scroll-behavior: smooth;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      opacity: 0;
+      transform: translateX(80px);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+    }
+
+    .slider-wrapper::-webkit-scrollbar {
+      display: none;
+    }
+
+    .slider-section.visible .slider-wrapper {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+
 
     /*Section 4*/
-    .section4 {
-      height: 50vh;
-      width: 100vw;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      font-weight: bold;
-    }
+/* === SECTION 4 (OUR SONGS) === */
+.section4 {
+  width: 100vw;
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #EDE8D0;
+  color: #000;
+  overflow: hidden;
+  position: relative;
+}
 
+.section4 .slider-section {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+}
 
-    .album-card {
-      display: flex;
-      align-items: center;
-      justify-content: space-evenly;
-      gap: 40px;
-      flex-wrap: wrap;
-      width: 100%;
-      color: #000;
-      height: calc(50vh - 40px);
-    }
+.section4 .slider-title {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 4rem;
+  font-weight: bold;
+  font-family: 'casagrande';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
 
-    .album-art {
-      width: clamp(250px, 30vw, 400px);
-      aspect-ratio: 1 / 1;
-      background-size: cover;
-      background-position: center;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    }
+.section4 .s4-slider-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
 
-    .album-info {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      text-align: left;
-      max-width: 400px;
-    }
+.album-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 40px;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  color: #000;
+}
 
-    .album-info h2 {
-      margin: 0;
-      font-size: 2rem;
-      font-family: 'casagrande';
-    }
+.album-art {
+  width: clamp(250px, 30vw, 400px);
+  aspect-ratio: 1 / 1;
+  background-size: cover;
+  background-position: center;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
 
-    .album-info p {
-      font-size: 1.1rem;
-      opacity: 0.8;
-      margin-top: 5px;
-      margin-bottom: 20px;
-    }
+.album-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  max-width: 400px;
+}
 
-    .album-buttons {
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
+.album-info h2 {
+  margin: 0;
+  font-size: 2rem;
+  font-family: 'casagrande';
+}
 
-    .album-btn {
-      padding: 10px 18px;
-      border: none;
-      border-radius: 30px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s ease;
-      text-decoration: none;
-    }
+.album-info p {
+  font-size: 1.1rem;
+  opacity: 0.8;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
 
-    .album-btn:hover {
-      transform: scale(1.05);
-    }
+.album-buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
 
-    .youtube-btn {
-      background: #7a3333;
-      color: white;
-    }
+.album-btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  text-decoration: none;
+}
 
-    .lyrics-btn {
-      background: #111;
-      color: #fff;
-    }
+.album-btn:hover {
+  transform: scale(1.05);
+}
+
+.youtube-btn {
+  background: #7a3333;
+  color: white;
+}
+
+.lyrics-btn {
+  background: #111;
+  color: #fff;
+}
+
 
     @keyframes fadeIn {
       from {
@@ -927,15 +994,15 @@
     <section class="section4" id="song">
       <section class="slider-section">
         <div class="slider-title">OUR SONGS</div>
-        <div class="slider-wrapper">
+        <div class="s4-slider-wrapper">
           <div class="album-card">
             <div class="album-art" style="background-image:url('your_album_art.jpg');"></div>
             <div class="album-info">
-              <h2>Our Song Title</h2>
-              <p>LPK26 — Class of 2026</p>
+              <h2>Song Title</h2>
+              <p>LPK26 — Hope, Determination and Nostalgia</p>
               <div class="album-buttons">
                 <a href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID" target="_blank" class="album-btn youtube-btn">
-                  ▶ Watch on YouTube
+                  ▶ YouTube
                 </a>
                 <button class="album-btn lyrics-btn" onclick="toggleLyrics()">View Lyrics</button>
               </div>
@@ -1057,6 +1124,7 @@
           setTimeout(() => { sectionText.style.opacity = 1; sectionText.style.transform = 'translateY(0)'; }, 3000);
 
           document.getElementById('topHeader').classList.add('visible');
+           welcomeContainer.style.display = 'none';
         }, 800);
       }, totalAnimationTime + 1200);
     }
