@@ -13,10 +13,18 @@
       font-style: normal;
     }
 
+    @font-face {
+      font-family: 'chemicallife';
+      src: url('chemicallife.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+
     body {
       margin: 0;
       padding: 0;
-      background:#EDE8D0;
+      background:#fff;
       font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     }
 
@@ -24,8 +32,8 @@
       text-align: center;
       padding: 40px 0 10px;
       color: #7a3333;
-      font-weight: 600;
-      font-family: 'casagrande';
+      font-size: 70px;
+      font-family: 'chemicallife';
     }
 
     h2 {
@@ -193,16 +201,31 @@
     .close-btn:hover {
       color: #bbb;
     }
+
+
+    svg{
+      width: calc(100vw - 30px);
+      top: 15px;
+      left: 15px;
+      position: absolute;
+      fill: #7a3333;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
   </style>
 </head>
 
 <body>
 
-  <h1>Memory Gallery 2026</h1>
+  <!-- Header with anchors -->
+
+  <div><svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480.415 83.322"><path d="M549.773,175.145c-.345-5.138-.717-9.628-.9-13-.035-.665-.225-7.713-.225-7.713s-6.359-.045-11.483-.151c-3.9-.082-8.042.209-8.042.209s-3.846,4.057-7.967,9.43c-.13.169-4.564,6.939-4.828,7.281-3.56,4.6-6.786,8.233-9.156,11.3-2.33-4.01-5.528-7.465-8.414-12.347-.109-.184-4.115-5.477-5.2-6.989a46.889,46.889,0,0,1-5.012-8.92s-5.437-.662-10.225-.809-10.732.149-10.732.149a59.375,59.375,0,0,1,.282,7.25c-.092,3.7-1.17,15.514-1.158,15.722.194,3.567.081,7.339.292,11.212.014.231-.954,10.324-1.285,14.684-.039.5-.082.989-.084,1.48-.032,4.418.245,16.744.225,16.9-.83,6.54-1.02,11.546-1.02,11.546l22.547-.187s.085-10.453.052-10.814c-.382-4.184-.452-9.133-.975-14.259-.016-.159.017-6.463.126-8.829.012-.267-.124-9.779-.056-13.792,1.045,2.151,3.33,6.03,3.611,6.43,2.548,3.64,5.093,7.25,6.7,9.54.246.351,1.72,2.869,1.72,2.869l0,0,2.525.419,12.852.5s3.958-5.219,8.307-11.321c.308-.436,6.817-10.209,8.427-12.808-.342,2.925-.078,18.384.211,21.012.047.427-.673,12.107-.842,16.643-.021.559-.011,15.37-.011,15.37l19.616.337s-.233-4.24-.735-10.773c-.021-.3.186-4.458.277-5.746.264-3.726.532-12.875.522-13.369-.074-4.345-.779-15.625-.749-15.989C549.285,183.782,549.794,175.43,549.773,175.145Z" transform="translate(-464.84 -151.457)"/><path d="M596.033,213.75c-.376-.025-9.244.749-9.806.759-5.237.081-9.17-.411-12.215-.349-.032-.319.6-4.983.624-8.994,0-.437-.436-3.47-.556-4.684,1.959-.083,5.6-.223,8.894-.262.469-.006,7.983.369,7.983.369l.363-8.666.322-9.152s-18.1,1.066-18.373,1.061l.068-7.173c1.817.144,9.928.308,10.314.281,3.534-.238,13.365-.711,13.365-.711l.254-17.7s-12.075.373-14.418.321l0,0c-9.62-.211-27.258-.289-27.258-.289s.979,12.844.979,13.234c0,.558-1.324,12.663-1.406,18.8-.073,5.367.8,16.447.8,16.688s-1.109,9.971-1.179,13.635a86.359,86.359,0,0,0,.448,10.564s5.008-.306,10.022-.186c5.213.127,11.914,1.1,17.913,1.348.675.027,15.406-.168,15.406-.168l-.123-18.43S596.459,213.779,596.033,213.75Z" transform="translate(-464.84 -151.457)"/><path d="M686.392,175.145c-.345-5.138-.718-9.628-.9-13-.035-.665-.225-7.713-.225-7.713s-6.36-.045-11.484-.151c-3.9-.082-8.041.209-8.041.209s-3.846,4.057-7.968,9.43c-.129.169-4.563,6.939-4.827,7.281-3.561,4.6-6.786,8.233-9.156,11.3-2.33-4.01-5.528-7.465-8.414-12.347-.109-.184-4.116-5.477-5.2-6.989a46.848,46.848,0,0,1-5.011-8.92s-5.437-.662-10.226-.809-10.731.149-10.731.149a59.5,59.5,0,0,1,.281,7.25c-.091,3.7-1.169,15.514-1.157,15.722.193,3.567.081,7.339.292,11.212.014.231-.954,10.324-1.286,14.684-.039.5-.081.989-.083,1.48-.033,4.418.245,16.744.225,16.9-.83,6.54-1.021,11.546-1.021,11.546l22.547-.187s.086-10.453.053-10.814c-.382-4.184-.452-9.133-.975-14.259-.016-.159.017-6.463.125-8.829.012-.267-.124-9.779-.056-13.792,1.046,2.151,3.33,6.03,3.612,6.43,2.548,3.64,5.092,7.25,6.7,9.54.247.351,1.721,2.869,1.721,2.869l0,0,2.525.419,12.852.5s3.958-5.219,8.306-11.321c.309-.436,6.818-10.209,8.427-12.808-.341,2.925-.077,18.384.212,21.012.046.427-.673,12.107-.842,16.643-.021.559-.012,15.37-.012,15.37l19.617.337s-.233-4.24-.735-10.773c-.022-.3.186-4.458.277-5.746.264-3.726.531-12.875.521-13.369-.073-4.345-.779-15.625-.748-15.989C685.9,183.782,686.413,175.43,686.392,175.145Z" transform="translate(-464.84 -151.457)"/><path d="M760.135,171.864a34.1,34.1,0,0,0-12.611-12.731c-4.514-2.75-16.189-4.18-16.859-4.2-6.25-.219-12.687.32-17.809,2.116-3.648,1.274-14.8,6.955-18.835,14.7-2.828,5.556-4.789,13.136-4.106,23.526.378,5.758,3.01,15.309,4.708,18.237,4.292,7.405,10.595,10.991,13.285,13.383v0c4.5,3.4,11.427,4.981,18.734,4.954,8.053-.03,16.893-3.2,18.6-3.957,6.652-2.872,12.359-7.057,16.094-14.968a32.832,32.832,0,0,0,2.848-8.557c.658-3.823.117-15.077.115-15.273C764.271,181.982,762.76,176.451,760.135,171.864ZM745.849,195.2c-.115,4.228-1.179,8.961-4.046,12.642a10.876,10.876,0,0,1-2.112,2.2c-1.785,1.292-9.777,3.243-13.1,3.13a17.616,17.616,0,0,1-10.989-3.753c-.314-.259-4.183-4.763-4.938-7.554-.942-3.479-1.722-6.6-1.588-8.621v0a25.1,25.1,0,0,1,3.074-12.514,33.027,33.027,0,0,1,4.186-5.11,17.09,17.09,0,0,1,11.983-3.744,37.47,37.47,0,0,1,4.085.639c7.85,2.034,12.131,11.088,12.241,11.373C745.693,186.674,745.872,194.285,745.849,195.2Z" transform="translate(-464.84 -151.457)"/><path d="M815.335,214.828c-2.422-2.442-11.247-16.067-11.247-16.067.223-.076,8.433-3.749,11.133-7.268,2.531-3.3,3.464-6.058,3.961-11.618a59.445,59.445,0,0,0,.426-7.162c-.07-3.462-2.914-11.573-8.177-14.851-1.643-1.022-3.084-2.28-4.847-3.155-2.591-1.288-7.15-3.1-10.619-3.143-4.408-.058-8.836-.238-12.827.061-5.54.413-14.766.927-14.766.927s.214,8.681.288,10.892c.11,3.1-.381,7.851-.567,13.7-.014.4.753,14.711.733,15-.242,3.4-.535,6.845-.477,10.219.007.379.719,14.391.676,15.039-.271,4.091-.181,15.893-.181,15.893l1.981.026,16.536-.765s.389-4.989.392-5.134c.078-4.426-.651-10.741-.415-16.428.023-.578-.424-5.671-.386-6.216l0,0s11.205,15.381,11.371,15.548a124.136,124.136,0,0,1,7.916,10.555c.081.13,3.956,3.906,3.956,3.906s1.325-.82,1.684-1.052c1.957-1.273,6.524-3.814,9.075-5.9a39.508,39.508,0,0,0,3-2.838s-4.072-4.317-4.2-4.514C818.871,219.077,815.51,215,815.335,214.828Zm-28.429-27.38c-.233-4.215.244-8.034.148-10.939-.1-3.071-.445-8.112-.784-10.811l0,0s7.383-1.257,11.74,2.473c2.211,1.891,3.1,4.393,3.106,8.043C801.153,188.588,786.906,187.448,786.906,187.448Z" transform="translate(-464.84 -151.457)"/><path d="M845.653,216.9c-.007-.377,1-10.666,1-10.966,0-.444-.985-11.288-.92-14.684.008-.4.84-14.969.817-15.363a162.238,162.238,0,0,1,.109-18.573l-3.717-.093-15.849.609s.056,3.99.019,4.777c-.174,3.708-.539,9.593-.867,16.407-.034.719.5,8.021.5,11.4,0,.368-.513,7.971-.547,10.81-.047,4.015.066,8.059.366,11.6.032.384-.17,8.452-.3,11.183-.009.194-.1,7.133-.1,7.133s4.42.214,4.6.224c4.221.213,15.806.064,15.806.064s.187-2.462.14-4.281C846.648,224.818,845.738,221.287,845.653,216.9Z" transform="translate(-464.84 -151.457)"/><path d="M892.728,213.75c-.376-.025-9.244.749-9.806.759-5.237.081-9.17-.411-12.216-.349-.03-.319.6-4.983.625-8.994,0-.437-.436-3.47-.557-4.684,1.959-.083,5.6-.223,8.895-.262.47-.006,7.983.369,7.983.369l.363-8.666.322-9.152s-18.1,1.066-18.373,1.061l.067-7.173c1.818.144,9.929.308,10.315.281,3.534-.238,13.365-.711,13.365-.711l.254-17.7s-12.075.373-14.418.321l0,0c-9.62-.211-27.258-.289-27.258-.289s.98,12.844.98,13.234c0,.558-1.326,12.663-1.407,18.8-.074,5.367.8,16.447.795,16.688s-1.109,9.971-1.179,13.635a86.12,86.12,0,0,0,.448,10.564s5.008-.306,10.021-.186c5.214.127,11.915,1.1,17.914,1.348.675.027,15.406-.168,15.406-.168l-.123-18.43S893.154,213.779,892.728,213.75Z" transform="translate(-464.84 -151.457)"/><path d="M936.289,194.719c-.232-.3-9.278-11-10.72-12.733a66.152,66.152,0,0,1-4.907-5.747c-1.314-2.172-1.412-3.83-.12-5.25,1.387-1.2,3.419-.557,5.57.8l0,0c2.5,1.579,8.141,7.207,8.141,7.207s2.99-3.373,5.48-6.235c1.467-1.688,5.524-7.7,5.524-7.7s-9.66-11.181-19.878-12.651a26.552,26.552,0,0,0-13.694,2.281c-2.691,1.464-6.851,5.229-8.143,7.384-4.9,8.167-1.621,17.727-.337,20.46,1.959,4.168,9.713,13.008,10.079,13.388,1.5,1.561,3.057,3.01,4.366,4.542,1.79,2.095,3.765,4.806,5.231,6.9.654.937,3.517,4.581-.624,7.558a3.7,3.7,0,0,1-4.779-.783c-.194-.2-5.191-8.406-5.191-8.406s-2.76,2.008-4.615,3.179c-.259.163-11.7,6.622-11.7,6.622,4.618,12.759,13.008,16.332,19.05,18.258a21.813,21.813,0,0,0,10.857.345,39.769,39.769,0,0,0,6.67-3.061c2.744-1.894,6.049-4.168,7.686-6.973.18-.307,2.684-5.185,3.164-7.627.521-2.661.464-9.075-1.513-12.94A55.779,55.779,0,0,0,936.289,194.719Z" transform="translate(-464.84 -151.457)"/></svg></div>
+  
 
   <!-- Prom Section -->
-  <!-- Prom Section -->
-  <h2>Prom</h2>
+  <h2 id="prom">Prom</h2>
   <br>
   <div class="gallery" data-section="prom">
     <img src="https://picsum.photos/400/600?random=1" alt="Prom Night"
@@ -217,14 +240,10 @@
       data-description="The hall lit up with colorful decorations.">
     <img src="https://picsum.photos/400/600?random=10" alt="Friends"
       data-description="Sharing laughs and dances with friends.">
-    <img src="https://picsum.photos/400/580?random=11" alt="The Dance Floor"
-      data-description="Everyone on the dance floor, lost in the music.">
-    <img src="https://picsum.photos/400/620?random=12" alt="Awards"
-      data-description="Celebrating achievements and unforgettable moments.">
   </div>
 
   <!-- Ramadhan Section -->
-  <h2>Ramadhan</h2>
+  <h2 id="ramadhan">Ramadhan</h2>
   <br>
   <div class="gallery" data-section="ramadhan">
     <img src="https://picsum.photos/400/400?random=4" alt="Iftar"
@@ -233,43 +252,29 @@
       data-description="A calm evening beneath the crescent moon.">
     <img src="https://picsum.photos/400/500?random=13" alt="Decor"
       data-description="Lanterns glowing softly in the evening.">
-    <img src="https://picsum.photos/400/600?random=14" alt="Family Meal"
-      data-description="Sharing Iftar with loved ones.">
-    <img src="https://picsum.photos/400/550?random=15" alt="Night Market"
-      data-description="The lively energy of the night market.">
-    <img src="https://picsum.photos/400/500?random=16" alt="Prayer Time"
-      data-description="Quiet moments of reflection.">
   </div>
 
   <!-- BacSport Section -->
-  <h2>BacSport</h2>
+  <h2 id="bacsport">BacSport</h2>
   <br>
   <div class="gallery" data-section="bacsport">
-    <img src="https://picsum.photos/400/750?random=6" alt="Running" data-description="Sweat, sun, and determination.">
+    <img src="https://picsum.photos/400/750?random=6" alt="Running"
+      data-description="Sweat, sun, and determination.">
     <img src="https://picsum.photos/400/650?random=7" alt="Victory"
       data-description="That feeling when you finally finish the race.">
-    <img src="https://picsum.photos/400/600?random=17" alt="Team Spirit"
-      data-description="Cheering for each other in every game.">
-    <img src="https://picsum.photos/400/700?random=18" alt="Basketball"
-      data-description="The ball flying through the hoop.">
-    <img src="https://picsum.photos/400/580?random=19" alt="Soccer" data-description="Teamwork and strategy in motion.">
-    <img src="https://picsum.photos/400/620?random=20" alt="Medal Ceremony"
-      data-description="Pride, smiles, and medals for hard work.">
   </div>
 
-  <!-- Optional: Add more sections -->
-  <h2>Graduation</h2>
+  <!-- Graduation Section -->
+  <h2 id="graduation">Graduation</h2>
   <br>
   <div class="gallery" data-section="graduation">
     <img src="https://picsum.photos/400/600?random=21" alt="Caps in Air"
       data-description="Celebrating the end of an era.">
-    <img src="https://picsum.photos/400/550?random=22" alt="Diploma" data-description="The hard work finally paid off.">
-    <img src="https://picsum.photos/400/650?random=23" alt="Friends"
-      data-description="Smiles and hugs that last forever.">
+    <img src="https://picsum.photos/400/550?random=22" alt="Diploma"
+      data-description="The hard work finally paid off.">
   </div>
 
-
-  <!-- Lightbox -->
+  <!-- Lightbox (unchanged) -->
   <div class="lightbox" id="lightbox">
     <span class="close-btn" id="closeBtn">&times;</span>
     <span class="arrow left" id="prev">&#10094;</span>
@@ -279,6 +284,7 @@
   </div>
 
   <script>
+    // Lightbox (same as before)
     const galleries = document.querySelectorAll('.gallery');
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = lightbox.querySelector('img');
@@ -334,8 +340,73 @@
       if (e.key === 'ArrowLeft') prevImage();
       if (e.key === 'Escape') closeLightbox();
     });
+
+    // Scroll button logic
+    const scrollBtn = document.getElementById('scrollBtn');
+    scrollBtn.addEventListener('click', () => {
+      window.scrollBy({ top: window.innerHeight * 0.5, behavior: 'smooth' });
+    });
   </script>
 
+  <style>
+    header {
+      position: sticky;
+      top: 0;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      padding: 15px 0;
+      border-bottom: 2px solid #7a3333;
+      z-index: 999;
+    }
+
+    header nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+    }
+
+    header nav a {
+      text-decoration: none;
+      color: #7a3333;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    header nav a:hover {
+      color: #b55a5a;
+    }
+
+    #scrollBtn {
+      display: none;
+      background: #7a3333;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 6px 12px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    #scrollBtn:hover {
+      background: #9b4646;
+    }
+
+    @media (max-width: 700px) {
+      #scrollBtn {
+        display: block;
+      }
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+
 </body>
+
 
 </html>
