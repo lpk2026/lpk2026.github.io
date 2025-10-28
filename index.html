@@ -24,6 +24,7 @@
     html {
       scroll-behavior: smooth;
       user-select: none;
+        scrollbar-gutter: stable;
     }
 
     body {
@@ -322,7 +323,7 @@
 
     /* === SECTION CONTAINER === */
     .slider-section {
-      width: 100vw;
+      width: 100%;
       height: 50vh;
       display: flex;
       background: #EDE8D0;
@@ -335,7 +336,7 @@
 
     /* === TITLE === */
     .slider-title {
-      width: 120px;
+      width: 110px;
       writing-mode: vertical-rl;
       transform: rotate(180deg);
       font-size: 4rem;
@@ -537,7 +538,7 @@
 
     /* A4 Placeholder */
     .a4-placeholder {
-      height: calc(50vh - 40px);
+      height: clamp(300px, 60vw, 400px);
       aspect-ratio: 1 / 1.414;
       background: #222;
       border: 2px dashed #555;
@@ -550,7 +551,7 @@
       /* hidden by default */
       text-align: center;
       padding: 40px;
-      width: calc(100vw - 80px);
+      width: calc(100% - 80px);
       margin: 0 auto;
       color: #fff;
       transition: opacity 1s ease, transform 1s ease;
@@ -579,7 +580,7 @@
 
 
     .section4.slider-wrapper {
-      width: calc(100vw - 150px);
+      width: calc(100% - 150px);
       justify-content: center;
       align-items: center;
       display: flex;
@@ -589,7 +590,7 @@
     }
 
     .section4.slider-section {
-      width: 100vw;
+      width: 100%;
       height: 70vh;
       display: flex;
       background: #EDE8D0;
@@ -627,7 +628,7 @@
     /*Section 4*/
     /* === SECTION 4 (OUR SONGS) === */
     .section4 {
-      width: 100vw;
+      width: 100%;
       height: 70vh;
       display: flex;
       justify-content: center;
@@ -733,13 +734,14 @@
     }
 
     .youtube-btn {
-      background: #7a3333;
-      color: white;
+      background: #EDE8D0;
+      color: #7a3333;
     }
 
     .lyrics-btn {
       background: #111;
-      color: #fff;
+      color: #EDE8D0;
+      font-family: 'cherrydance';
     }
 
 
@@ -1012,7 +1014,7 @@
         <div class="slider-title">OUR SONGS</div>
         <div class="s4-slider-wrapper">
           <div class="album-card">
-            <div class="album-art" style="background-image:url('your_album_art.jpg');"></div>
+            <div class="album-art" style="background-image:url('palestine.jpg');"></div>
             <div class="album-info">
               <h2>Song Title</h2>
               <p>LPK26 — Hope, Determination and Nostalgia</p>
