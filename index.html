@@ -2,11 +2,10 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LPK26</title>
   <style>
-    /* FONTS */
     @font-face {
       font-family: 'casagrande';
       src: url('casagrande.ttf') format('truetype');
@@ -21,11 +20,10 @@
       font-style: normal;
     }
 
-    /* ROOT / BODY */
+
     html {
       scroll-behavior: smooth;
       user-select: none;
-      scrollbar-gutter: stable;
     }
 
     body {
@@ -37,7 +35,7 @@
       overflow: hidden;
     }
 
-    /* QUOTE TYPING */
+    /* Quote typing */
     .quote-container {
       position: fixed;
       top: 50%;
@@ -52,7 +50,9 @@
       background: #111;
       z-index: 10000;
       padding: 0 20px;
+      /* ADD padding so it doesn't touch edges */
       box-sizing: border-box;
+      /* ensure padding is counted inside width */
     }
 
     #quote-text {
@@ -62,6 +62,7 @@
       max-width: 700px;
       line-height: 1.4;
       white-space: normal;
+      /* allow wrapping */
       word-break: break-word;
       overflow: hidden;
     }
@@ -77,7 +78,10 @@
       }
     }
 
-    /* WELCOME TEXT */
+
+
+
+    /* Welcome text */
     #welcomeText {
       position: fixed;
       top: 50%;
@@ -116,7 +120,7 @@
       }
     }
 
-    /* HEADER */
+    /* Header */
     header {
       position: fixed;
       top: 0;
@@ -159,7 +163,6 @@
       cursor: pointer;
     }
 
-    /* HAMBURGER */
     .menu {
       width: 30px;
       height: 22px;
@@ -208,16 +211,18 @@
       background: #000;
     }
 
-    /* NAV LINKS PANEL */
+    /* Dropdown menu */
     .nav-links {
       position: fixed;
       top: 0;
       right: 0;
+      /* align to the right edge */
       width: 300px;
       height: 100vh;
       background: rgba(255, 255, 255, 0.95);
       color: #000;
       transform: translateX(100%);
+      /* fully off-screen to the right */
       opacity: 0;
       transition: transform 0.4s ease, opacity 0.4s ease;
       z-index: 800;
@@ -248,17 +253,18 @@
 
     .nav-links.active {
       transform: translateX(0);
+      /* slide into view */
       opacity: 1;
     }
 
-    /* MAIN CONTENT */
+    /* Main Content */
     #mainContent {
       opacity: 0;
       transition: opacity 1s ease;
       font-size: 24px;
     }
 
-    /* SECTION SEPARATOR */
+    /* Section separator */
     .section-separator {
       width: 80%;
       height: 3px;
@@ -306,15 +312,16 @@
       padding: 20px;
     }
 
-    /* SECTION 2 */
+    /* Section 2 */
     .section2 {
       display: flex;
       flex-direction: column;
       justify-content: center;
       text-align: center;
-      background: #EDE8D0;
+            background: #EDE8D0;
     }
 
+    /* === SECTION CONTAINER === */
     .slider-section {
       width: 100%;
       height: 50vh;
@@ -326,6 +333,8 @@
       position: relative;
     }
 
+
+    /* === TITLE === */
     .slider-title {
       width: 110px;
       writing-mode: vertical-rl;
@@ -344,7 +353,7 @@
       opacity: 1;
     }
 
-    /* SLIDER WRAPPER (SECTION 2) */
+    /* === SLIDER WRAPPER === */
     .slider-wrapper {
       flex: 1;
       overflow-x: auto;
@@ -367,7 +376,7 @@
       transform: translateX(0);
     }
 
-    /* SLIDER / SLIDE */
+    /* === SLIDER === */
     .slider {
       display: flex;
       gap: 20px;
@@ -378,8 +387,11 @@
       content: "";
       display: block;
       min-width: 20px;
+      /* acts as end padding */
     }
 
+
+    /* === SLIDE === */
     .slide {
       width: clamp(250px, 50vw, 700px);
       height: 100%;
@@ -397,11 +409,6 @@
       transition: transform 0.2s ease;
       opacity: 1;
       transform: none;
-      position: relative;
-      min-width: 250px;
-      height: calc(50vh - 40px);
-      border-radius: 12px;
-      overflow: hidden;
     }
 
     .slide:hover {
@@ -426,15 +433,27 @@
       font-family: 'casagrande';
       font-size: 1.5rem;
       color: #EDE8D0;
+
     }
 
     .slide.see-more:hover {
       transform: scale(1.05);
     }
 
+    /* Fade-in slides */
     .slide.visible {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    .slide {
+      position: relative;
+      min-width: 250px;
+      height: calc(50vh - 40px);
+      flex-shrink: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
     }
 
     .slide-bg {
@@ -470,7 +489,8 @@
       opacity: 0.9;
     }
 
-    /* SECTION 3 */
+
+    /* Section 3*/
     .section3 {
       height: 50vh;
       display: flex;
@@ -479,6 +499,7 @@
       background-color: #111;
     }
 
+    /* === YEARBOOK SECTION === */
     .yearbook-wrapper {
       display: flex;
       align-items: center;
@@ -502,6 +523,7 @@
       transform: translateX(0);
     }
 
+    /* Flip title to right side */
     .right-title {
       order: 2;
       transform: rotate(180deg);
@@ -510,6 +532,7 @@
       background-color: #111;
     }
 
+    /* Content layout */
     .yearbook-content {
       display: flex;
       align-items: center;
@@ -520,6 +543,7 @@
       color: #fff;
     }
 
+    /* A4 Placeholder */
     .a4-placeholder {
       height: clamp(300px, 60vw, 400px);
       aspect-ratio: 1 / 1.414;
@@ -528,8 +552,10 @@
       border-radius: 8px;
     }
 
+    /* Yearbook paragraph for small screens */
     #yearbookTextMobile {
       display: none;
+      /* hidden by default */
       text-align: center;
       padding: 40px;
       width: calc(100% - 80px);
@@ -538,6 +564,7 @@
       transition: opacity 1s ease, transform 1s ease;
       justify-content: center;
       align-items: center;
+
     }
 
     #yearbookTextMobile.visible {
@@ -546,16 +573,19 @@
     }
 
     @media (max-width: 900px) {
+
+      /* Hide original paragraph inside yearbook content */
       .yearbook-content p {
         display: none;
       }
 
+      /* Show mobile text section */
       #yearbookTextMobile {
         display: flex;
       }
     }
 
-    /* SECTION 4 */
+
     .section4.slider-wrapper {
       width: calc(100% - 150px);
       justify-content: center;
@@ -575,6 +605,7 @@
       overflow: hidden;
       margin: 0;
       position: relative;
+
     }
 
     .s4-slider-wrapper {
@@ -588,12 +619,15 @@
       transition: opacity 1.2s ease, transform 1.2s ease;
     }
 
+    /* make Section 4 wrapper animate in when .visible is added by the observer */
     .s4-slider-wrapper.visible,
     .slider-section.visible .s4-slider-wrapper {
       opacity: 1;
       transform: translateX(0);
     }
 
+    /*Section 4*/
+    /* === SECTION 4 (OUR SONGS) === */
     .section4 {
       width: 100%;
       height: 70vh;
@@ -626,6 +660,24 @@
       height: 100%;
       background-color: #7a3333;
       color: #EDE8D0;
+    }
+
+  .s4-slider-wrapper {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateX(80px);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+    }
+
+    /* make Section 4 wrapper animate in when .visible is added by the observer */
+    .s4-slider-wrapper.visible,
+    .slider-section.visible .s4-slider-wrapper {
+      opacity: 1;
+      transform: translateX(0);
     }
 
     .album-card {
@@ -703,7 +755,7 @@
       font-family: 'cherrydance';
     }
 
-    /* UTILITIES */
+
     @keyframes fadeIn {
       from {
         opacity: 0;
@@ -716,7 +768,8 @@
       }
     }
 
-    /* SECTION 5 */
+    /*Section 5*/
+
     .section5 {
       height: 700px;
       position: relative;
@@ -773,7 +826,6 @@
       padding: 10px;
     }
 
-    /* FOOTER / SCROLLBAR */
     footer {
       background: #111;
       color: #fff;
@@ -815,7 +867,8 @@
 </head>
 
 <body>
-  <!-- SECTION: QUOTE -->
+
+  <!-- Quote typing -->
   <div class="quote-container">
     <p id="quote-text">
       even if hope falters, the will endures
@@ -823,11 +876,12 @@
     </p>
   </div>
 
-  <!-- SECTION: WELCOME -->
+
+  <!-- Welcome Text -->
   <div id="welcomeText"></div>
   <div id="floatingWelcome"></div>
 
-  <!-- HEADER -->
+  <!-- Header -->
   <header id="topHeader">
     <div class="header-titles">
       <span class="title-item"><a href="#events">Events</a></span>
@@ -837,7 +891,6 @@
     <div class="menu" id="hamburger"><span></span><span></span><span></span></div>
   </header>
 
-  <!-- NAV -->
   <div class="nav-links" id="navLinks">
     <a href="#events" style="text-decoration: none;">Events</a>
     <ul>
@@ -847,21 +900,21 @@
       <li><a href="gallery.html/#bacsport">Bac Sport</a></li>
     </ul>
     <a href="#yearbook" style="text-decoration: none;">Yearbook</a>
-    <br />
+    <br>
     <a href="#song" style="text-decoration: none;">Our Song</a>
-    <br />
+    <br>
     <a href="password.html" style="text-decoration: none;">Randoms</a>
   </div>
 
   <div id="mainContent">
     <section class="section1">
       <div id="bigBlue"></div>
-      <div id="section1Text"><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />Four years.<br />Four
-        years of hard work and endless labor,<br />of challenges faced and lessons learned.<br />Four years of late nights,
-        early mornings, and moments that tested our determination, but also shaped our character.<br />Four years of
-        overcoming hardships, pushing ourselves beyond limits, and discovering what we are truly capable of.<br />Four
-        years of laughter, shared memories, and unwavering support from friends who became family—<br />not by blood, but
-        by a bond stronger than any grade or class.<br />This is our journey at Lycée Pilote Kasserine: a journey of
+      <div id="section1Text"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>Four years.<br>Four
+        years of hard work and endless labor,<br>of challenges faced and lessons learned.<br>Four years of late nights,
+        early mornings, and moments that tested our determination, but also shaped our character.<br>Four years of
+        overcoming hardships, pushing ourselves beyond limits, and discovering what we are truly capable of.<br>Four
+        years of laughter, shared memories, and unwavering support from friends who became family—<br>not by blood, but
+        by a bond stronger than any grade or class.<br>This is our journey at Lycée Pilote Kasserine: a journey of
         growth, resilience, and unity, marking the culmination of our baccalauréat and the beginning of everything that
         lies ahead.</div>
     </section>
@@ -871,8 +924,11 @@
         <div class="slider-title">EVENTS</div>
         <div class="slider-wrapper">
           <div class="slider">
+
+            <!-- Event 1 -->
             <div class="slide">
-              <div class="slide-bg" style="background-image:url('https://via.placeholder.com/400x250?text=Ramadhan');"></div>
+              <div class="slide-bg" style="background-image:url('https://via.placeholder.com/400x250?text=Ramadhan');">
+              </div>
               <div class="overlay red"></div>
               <div class="caption">
                 <h3>Ramadhan Gathering</h3>
@@ -880,8 +936,10 @@
               </div>
             </div>
 
+            <!-- Event 2 -->
             <div class="slide">
-              <div class="slide-bg" style="background-image:url('https://via.placeholder.com/400x250?text=Prom');"></div>
+              <div class="slide-bg" style="background-image:url('https://via.placeholder.com/400x250?text=Prom');">
+              </div>
               <div class="overlay white"></div>
               <div class="caption">
                 <h3>Prom Night</h3>
@@ -889,8 +947,10 @@
               </div>
             </div>
 
+            <!-- Event 3 -->
             <div class="slide">
-              <div class="slide-bg" style="background-image:url('https://via.placeholder.com/400x250?text=Bac+Kickoff');"></div>
+              <div class="slide-bg"
+                style="background-image:url('https://via.placeholder.com/400x250?text=Bac+Kickoff');"></div>
               <div class="overlay red"></div>
               <div class="caption">
                 <h3>Bac Kickoff</h3>
@@ -898,8 +958,10 @@
               </div>
             </div>
 
+            <!-- Event 4 -->
             <div class="slide">
-              <div class="slide-bg" style="background-image:url('https://via.placeholder.com/400x250?text=Bac+Sport');"></div>
+              <div class="slide-bg" style="background-image:url('https://via.placeholder.com/400x250?text=Bac+Sport');">
+              </div>
               <div class="overlay white"></div>
               <div class="caption">
                 <h3>Bac Sport</h3>
@@ -907,15 +969,22 @@
               </div>
             </div>
 
+            <!-- See More -->
+            <!-- See More Slide -->
             <div class="slide see-more">
+
               <svg width="80" height="80" viewBox="0 0 80 80">
+                <!-- Outer circle -->
                 <circle cx="40" cy="40" r="38" stroke="#EDE8D0" stroke-width="2" fill="transparent" />
+
+                <!-- Plus sign -->
                 <line x1="40" y1="20" x2="40" y2="60" stroke="#EDE8D0" stroke-width="12" />
                 <line x1="20" y1="40" x2="60" y2="40" stroke="#EDE8D0" stroke-width="12" />
               </svg>
-              <br /><br />
+              <br><br>
               See More
             </div>
+
           </div>
         </div>
       </section>
@@ -925,28 +994,32 @@
       "Once upon a time, in the small town of Kasserine, there was a generation of young people who, during 2026, closed
       a chapter of their lives that marked the beginning of a new era, yet still lingered in the back of their minds as
       a sweet, nostalgic memory they would always long for.
-      <br />This, dear reader, is a dive into that world of theirs, a flavor of their youth, and a reminder of what they
+      <br>This, dear reader, is a dive into that world of theirs, a flavor of their youth, and a reminder of what they
       once had."
     </section>
 
     <section class="section3" id="yearbook">
+      <!-- Mobile paragraph for small screens -->
+
+
       <section class="slider-section" id="yearbookSection">
         <div class="yearbook-wrapper">
           <div class="yearbook-content">
             <div class="a4-placeholder"></div>
-            <p>
+            <p style="max-width: 700px;">
               "Ounce upon a time in the small town of kasserine there was a generation of young people who , during 2026
               , closed a chapter of their lives that marked the beginning of a new ara but still persisted in the back
               of their heads as a sweet nostalgic memory that they'll always long for .
-              <br />This , dear reader , is a dive into that wold of theirs , a flavour of their youth and a reminder of
+              <br>This , dear reader , is a dive into that wold of theirs , a flavour of their youth and a reminder of
               what they ounce had . "
+
             </p>
           </div>
         </div>
         <div class="slider-title right-title">YEARBOOK</div>
       </section>
     </section>
-
+    </section>
     <section class="section4" id="song">
       <section class="slider-section" id="s4">
         <div class="slider-title">OUR SONGS</div>
@@ -957,7 +1030,9 @@
               <h2>Song Title</h2>
               <p>LPK26 — Hope, Determination and Nostalgia</p>
               <div class="album-buttons">
-                <a href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID" target="_blank" class="album-btn youtube-btn">▶ YouTube</a>
+                <a href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID" target="_blank" class="album-btn youtube-btn">
+                  ▶ YouTube
+                </a>
                 <button class="album-btn lyrics-btn" onclick="toggleLyrics()">View Lyrics</button>
               </div>
             </div>
@@ -966,11 +1041,12 @@
       </section>
     </section>
 
+
     <section class="section5">
       <div id="spin"></div>
       <div id="div"></div>
       <div id="speech">
-        <img src="freeps.png" style="width: clamp(400px, 80vw, 600px);" />
+        <img src="freeps.png" style="width: clamp(400px, 80vw, 600px);">
         <p>At Lycée Pilote Kasserine, we will never forget the struggle of the Palestinian people. We stand unshakably
           with them in their fight for justice, freedom, and dignity. Their cause is our cause—today, tomorrow, and
           always.</p>
@@ -978,110 +1054,178 @@
     </section>
   </div>
 
-  <footer id="footer"><p>Goodbye — see you again soon 💙</p></footer>
+  <footer id="footer">
+    <p>Goodbye — see you again soon 💙</p>
+  </footer>
 
   <script>
-    // BOOT: type quote then show welcome
-    window.addEventListener('DOMContentLoaded', () => { typeQuote().then(() => { document.querySelector('.quote-container').style.opacity = 0; setTimeout(() => { document.querySelector('.quote-container').remove(); showWelcomeText(); }, 800); }); });
+    /* Preloader + Welcome Animation */
+    // Skip preloader — directly show welcome text
+    /* Preloader + Welcome Animation */
+    // Typewriter first, then welcome text
+    window.addEventListener("DOMContentLoaded", () => {
+      typeQuote().then(() => {
+        document.querySelector(".quote-container").style.opacity = 0;
+        setTimeout(() => {
+          document.querySelector(".quote-container").remove();
+          showWelcomeText();
+        }, 800);
+      });
+    });
 
-    // typewriter for quote
     function typeQuote() {
-      return new Promise(resolve => {
-        const quote = document.getElementById('quote-text');
-        const lines = quote.textContent.trim().split('\n');
-        quote.innerHTML = '';
+      return new Promise((resolve) => {
+        const quote = document.getElementById("quote-text");
+        const lines = quote.textContent.trim().split("\n");
+        quote.innerHTML = ""; // clear text
+
         let lineIndex = 0;
-        function typeLine(line, cb) {
-          const span = document.createElement('span'); span.classList.add('typing'); quote.appendChild(span);
+
+        function typeLine(line, callback) {
+          const span = document.createElement('span');
+          span.classList.add('typing');
+          quote.appendChild(span);
+
           let i = 0;
-          function typeChar() { if (i < line.length) { span.textContent += line.charAt(i); i++; setTimeout(typeChar, 55); } else { span.classList.remove('typing'); cb(); } }
+          function typeChar() {
+            if (i < line.length) {
+              span.textContent += line.charAt(i);
+              i++;
+              setTimeout(typeChar, 55);
+            } else {
+              span.classList.remove('typing'); // remove cursor from finished line
+              callback();
+            }
+          }
           typeChar();
         }
+
         function nextLine() {
           if (lineIndex < lines.length) {
-            typeLine(lines[lineIndex], () => { quote.appendChild(document.createElement('br')); lineIndex++; setTimeout(nextLine, 200); });
+            typeLine(lines[lineIndex], () => {
+              quote.appendChild(document.createElement("br")); // line break
+              lineIndex++;
+              setTimeout(nextLine, 200);
+            });
           } else {
-            quote.style.transition = 'opacity 1s ease'; quote.style.opacity = 0; setTimeout(resolve, 1000);
+            // fade out smoothly
+            quote.style.transition = "opacity 1s ease";
+            quote.style.opacity = 0;
+            setTimeout(resolve, 1000);
           }
         }
+
         nextLine();
       });
     }
 
-    // welcome animation sequence
+
+
+
     function showWelcomeText() {
       const welcomeContainer = document.getElementById('welcomeText');
-      const textLines = ['LYCEE','PILOTE','KASSERINE','WELCOMES','YOU'];
+      const textLines = ["LYCEE", "PILOTE", "KASSERINE", "WELCOMES", "YOU"];
       welcomeContainer.innerHTML = '';
-      textLines.forEach(line => {
+      textLines.forEach((line) => {
         const lineDiv = document.createElement('div'); lineDiv.className = 'welcome-line';
-        line.split('').forEach((char,i) => { const span = document.createElement('span'); span.textContent = char === ' ' ? '\u00A0' : char; span.style.animationDelay = `${i * 0.05}s`; lineDiv.appendChild(span); });
-        welcomeContainer.appendChild(lineDiv);
+        line.split('').forEach((char, i) => { const span = document.createElement('span'); span.textContent = char === ' ' ? '\u00A0' : char; span.style.animationDelay = `${i * 0.05}s`; lineDiv.appendChild(span); }); welcomeContainer.appendChild(lineDiv);
       });
       welcomeContainer.style.opacity = 1;
       const totalAnimationTime = textLines.join('').length * 0.05 * 1000 + 800;
       setTimeout(() => {
-        welcomeContainer.style.opacity = 0;
-        setTimeout(() => {
+        welcomeContainer.style.opacity = 0; setTimeout(() => {
           document.getElementById('mainContent').style.opacity = 1;
           document.getElementById('footer').classList.add('visible');
           document.body.style.overflowY = 'scroll';
           document.body.classList.add('show-scrollbar');
           document.getElementById('floatingWelcome').style.opacity = '1';
+
           const blueDiv = document.getElementById('bigBlue');
           const sectionText = document.getElementById('section1Text');
+
+          // Step 1: fade in and scale
           setTimeout(() => { blueDiv.style.opacity = 1; blueDiv.style.transform = 'translate(-50%, -50%) scale(1)'; }, 500);
-          setTimeout(() => { const blueRect = blueDiv.getBoundingClientRect(); const offset = (window.innerHeight / 2) - (blueRect.height / 2) - 100; blueDiv.style.transform = `translate(-50%, calc(-50% - ${offset}px)) scale(1)`; }, 2000);
+
+          // Step 2: slide up by 20% of viewport
+          setTimeout(() => { const blueRect = blueDiv.getBoundingClientRect(); const currentTop = blueRect.top + window.scrollY; const targetTop = 100; const offset = (window.innerHeight / 2) - (blueRect.height / 2) - targetTop; blueDiv.style.transform = `translate(-50%, calc(-50% - ${offset}px)) scale(1)`; }, 2000);
+
+          // Step 3: show paragraph
           setTimeout(() => { sectionText.style.opacity = 1; sectionText.style.transform = 'translateY(0)'; }, 3000);
+
           document.getElementById('topHeader').classList.add('visible');
           welcomeContainer.style.display = 'none';
         }, 800);
       }, totalAnimationTime + 1200);
     }
 
-    // header visibility on scroll
+    /* Header scroll behavior */
     const topHeader = document.getElementById('topHeader');
     const hamburgerMenu = document.getElementById('hamburger');
     const headerTitles = document.querySelector('.header-titles');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 100) {
-        headerTitles.style.opacity = 0; hamburgerMenu.style.opacity = 1; headerTitles.style.visibility = 'hidden'; hamburgerMenu.style.visibility = 'visible';
-      } else {
-        headerTitles.style.opacity = 1; hamburgerMenu.style.opacity = 0; headerTitles.style.visibility = 'visible'; hamburgerMenu.style.visibility = 'hidden';
-      }
-    });
+    window.addEventListener('scroll', () => { if (window.scrollY > 100) { headerTitles.style.opacity = 0; hamburgerMenu.style.opacity = 1; headerTitles.style.visibility = 'hidden'; hamburgerMenu.style.visibility = 'visible'; } else { headerTitles.style.opacity = 1; hamburgerMenu.style.opacity = 0; headerTitles.style.visibility = 'visible'; hamburgerMenu.style.visibility = 'hidden'; } });
 
-    // hamburger toggle
+    /* Hamburger Menu */
     const navLinks = document.getElementById('navLinks');
     hamburgerMenu.addEventListener('click', () => {
       const isActive = navLinks.classList.toggle('active');
       hamburgerMenu.classList.toggle('active');
-      document.body.style.overflow = isActive ? 'hidden' : 'auto';
+
+      if (isActive) {
+        document.body.style.overflow = 'hidden'; // block scroll
+      } else {
+        document.body.style.overflow = 'auto'; // restore scroll
+      }
     });
 
-    // observer: reveal slider sections and yearbook/section4 wrapper
-    document.querySelectorAll('.slider-section').forEach(section => {
+
+
+
+    /* Section2 Box Fade In */
+
+    // === SECTION ANIMATION OBSERVER ===
+    const section2 = document.querySelectorAll('.slider-section');
+    section2.forEach(section => {
       const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
       }, { threshold: 0.2 });
       observer.observe(section);
     });
 
-    document.querySelectorAll('.yearbook-wrapper').forEach(section => {
+    const section3 = document.querySelectorAll('.yearbook-wrapper');
+    section3.forEach(section => {
       const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
       }, { threshold: 0.2 });
       observer.observe(section);
     });
 
-    document.querySelectorAll('.s4-slider-wrapper').forEach(section => {
+        const section4 = document.querySelectorAll('.s4-slider-wrapper');
+    section4.forEach(section => {
       const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
       }, { threshold: 0.2 });
       observer.observe(section);
     });
 
-    // slider drag / touch / wheel handlers
+
+
+
+    // === DRAG / TOUCH / SCROLL FOR SLIDERS ===
     document.querySelectorAll('.slider').forEach(slider => {
       let isDown = false, startX, scrollLeft;
       slider.addEventListener('mousedown', e => { isDown = true; startX = e.pageX - slider.offsetLeft; scrollLeft = slider.scrollLeft; });
@@ -1090,29 +1234,39 @@
       slider.addEventListener('mousemove', e => { if (!isDown) return; e.preventDefault(); slider.scrollLeft = scrollLeft - (e.pageX - startX); });
       slider.addEventListener('touchstart', e => { startX = e.touches[0].pageX - slider.offsetLeft; scrollLeft = slider.scrollLeft; });
       slider.addEventListener('touchmove', e => { slider.scrollLeft = scrollLeft - (e.touches[0].pageX - startX); });
-      slider.addEventListener('wheel', e => { if (e.shiftKey) { e.preventDefault(); slider.scrollLeft += e.deltaY; } });
+      slider.addEventListener('wheel', e => {
+        if (e.shiftKey) { // scroll horizontally if shift is held
+          e.preventDefault();
+          slider.scrollLeft += e.deltaY;
+        }
+        // otherwise, let vertical scroll happen naturally
+      });
+
     });
 
-    // section 3 video placeholder loader (keeps DOM ready)
-    (function() {
+    /*Section 3 vid*/
+    (() => {
       const VIDEO_ID = 'placeholder';
       const thumb = document.getElementById('videoThumb');
       const playBtn = document.getElementById('playBtn');
       const embedWrap = document.getElementById('embedWrap');
+
       function loadIframe() {
-        if (!embedWrap || embedWrap.querySelector('iframe')) return;
+        if (embedWrap.querySelector('iframe')) return;
         const ifr = document.createElement('iframe');
         ifr.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
         ifr.setAttribute('allowfullscreen', '');
         ifr.src = `https://www.youtube.com/embed/${VIDEO_ID}?rel=0&modestbranding=1&autoplay=1`;
-        ifr.style.width = '100%'; ifr.style.height = '100%';
+        ifr.style.width = '100%';
+        ifr.style.height = '100%';
         embedWrap.appendChild(ifr);
-        if (thumb) thumb.style.display = 'none';
+        thumb.style.display = 'none';
       }
-      if (thumb) thumb.addEventListener('click', loadIframe);
-      if (playBtn) playBtn.addEventListener('click', loadIframe);
+
+      thumb.addEventListener('click', loadIframe);
+      playBtn.addEventListener('click', loadIframe);
     })();
+
   </script>
 </body>
-
 </html>
