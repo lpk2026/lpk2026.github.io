@@ -1,0 +1,51 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        #spin {
+            background-image: url('ptrnps.png');
+            background-repeat: repeat-x;
+            background-size: contain;
+            height: 90px;
+            width: 830px;
+            position: absolute;
+            top: 0;
+            left:-165px;
+            z-index: 1;
+            transform: rotate(45deg) translateY(200px);
+            animation: scrollLeft 10s linear infinite;
+        }
+
+        @keyframes scrollLeft {
+            from {
+                background-position: 0 0;
+            }
+
+            to {
+                background-position: -600px 0;
+            }
+
+            /* animate full-width shift */
+        }
+        #bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-image:url('bgps.png');
+            width: 500px;
+            height: 500px;
+            background-size: cover;
+            z-index: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="spin"></div>
+    <div id="bg"></div>
+</body>
+
+</html>
