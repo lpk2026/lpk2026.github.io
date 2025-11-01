@@ -318,7 +318,7 @@
       flex-direction: column;
       justify-content: center;
       text-align: center;
-            background: #EDE8D0;
+      background: #EDE8D0;
     }
 
     /* === SECTION CONTAINER === */
@@ -662,7 +662,7 @@
       color: #EDE8D0;
     }
 
-  .s4-slider-wrapper {
+    .s4-slider-wrapper {
       flex: 1;
       display: flex;
       justify-content: center;
@@ -863,6 +863,93 @@
       scrollbar-width: thin;
       scrollbar-color: rgba(180, 180, 180, 0.5) rgba(180, 180, 180, 0.1);
     }
+
+    /* LYRICS MODAL */
+    .lyrics-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: flex-start; /* place modal starting from top padding */
+      justify-content: center;
+      padding: 220px 100px; /* 220px top & bottom, 100px left & right */
+      box-sizing: border-box;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 220ms ease;
+      z-index: 11000;
+    }
+
+    .lyrics-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .lyrics-modal {
+      width: 100%;
+      max-width: 960px;
+      max-height: calc(100vh - 440px); /* leaves 220px top + 220px bottom */
+      background: #fff;
+      color: #000;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      padding: 18px 18px 12px 18px;
+      position: relative;
+      transform: scale(.98);
+      transition: transform 220ms ease;
+      overflow: hidden;
+    }
+
+    .lyrics-overlay.active .lyrics-modal {
+      transform: scale(1);
+    }
+
+    /* Responsive fallback for small viewports */
+    @media (max-width: 640px) {
+      .lyrics-overlay { padding: 40px 16px; }
+      .lyrics-modal { max-height: calc(100vh - 80px); border-radius: 8px; }
+    }
+
+    .lyrics-modal .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: transparent;
+      border: none;
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+      color: #222;
+      padding: 6px;
+      border-radius: 6px;
+    }
+
+    .lyrics-modal .close-btn:hover {
+      background: rgba(0, 0, 0, 0.06);
+    }
+
+    .lyrics-modal h3 {
+      margin: 6px 0 12px;
+      font-family: 'casagrande';
+      font-size: 1.4rem;
+    }
+
+    .lyrics-content {
+      overflow: auto;
+      max-height: calc(80vh - 110px);
+      padding-right: 8px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      font-size: 1rem;
+      background: linear-gradient(180deg, transparent 0%, transparent 92%, rgba(0, 0, 0, 0.02) 100%);
+    }
+
+    .lyrics-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 12px;
+    }
   </style>
 </head>
 
@@ -1054,6 +1141,43 @@
     </section>
   </div>
 
+  <!-- LYRICS MODAL -->
+  <div id="lyricsOverlay" class="lyrics-overlay" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="lyrics-modal" role="document" aria-labelledby="lyricsTitle">
+      <button class="close-btn" id="closeLyricsBtn" aria-label="Close lyrics">✕</button>
+      <h3 id="lyricsTitle">Song Title — Lyrics</h3>
+      <div class="lyrics-content" id="lyricsContent" tabindex="0">
+        <!-- Put your lyrics here. Newlines preserved. Example: -->
+        Verse 1
+        Line one of lyrics...
+        Line two of lyrics...
+
+        Chorus
+        La la la...
+        banana journey
+        fohrbfr
+        efrg
+        rgr
+=
+egfef
+fe
+fe
+fe
+fe
+fe
+fed
+ed
+dedefefe
+fefefeded
+effefefef
+
+      </div>
+      <div class="lyrics-footer">
+        <button class="album-btn lyrics-btn" id="closeLyricsFooter">Close</button>
+      </div>
+    </div>
+  </div>
+
   <footer id="footer">
     <p>Goodbye — see you again soon 💙</p>
   </footer>
@@ -1209,7 +1333,7 @@
       observer.observe(section);
     });
 
-        const section4 = document.querySelectorAll('.s4-slider-wrapper');
+    const section4 = document.querySelectorAll('.s4-slider-wrapper');
     section4.forEach(section => {
       const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
@@ -1252,6 +1376,7 @@
       const embedWrap = document.getElementById('embedWrap');
 
       function loadIframe() {
+        if (!embedWrap) return; // guard if element missing
         if (embedWrap.querySelector('iframe')) return;
         const ifr = document.createElement('iframe');
         ifr.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
@@ -1260,13 +1385,66 @@
         ifr.style.width = '100%';
         ifr.style.height = '100%';
         embedWrap.appendChild(ifr);
-        thumb.style.display = 'none';
+        if (thumb) thumb.style.display = 'none';
       }
 
-      thumb.addEventListener('click', loadIframe);
-      playBtn.addEventListener('click', loadIframe);
+      if (thumb) thumb.addEventListener('click', loadIframe);
+      if (playBtn) playBtn.addEventListener('click', loadIframe);
     })();
 
+    // LYRICS MODAL HANDLERS
+    (function () {
+      const overlay = document.getElementById('lyricsOverlay');
+      const closeBtn = document.getElementById('closeLyricsBtn');
+      const closeFooter = document.getElementById('closeLyricsFooter');
+      const lyricsContent = document.getElementById('lyricsContent');
+      const body = document.body;
+
+      window.toggleLyrics = function (lyricsText, title) {
+        // optional args: lyricsText (string) and title (string)
+        if (lyricsText) lyricsContent.textContent = lyricsText;
+        if (title) document.getElementById('lyricsTitle').textContent = title;
+        openLyrics();
+      };
+
+      function openLyrics() {
+        overlay.classList.add('active');
+        overlay.setAttribute('aria-hidden', 'false');
+        body.style.overflow = 'hidden';
+        // focus for keyboard users
+        setTimeout(() => lyricsContent.focus(), 220);
+        // trap key ESC to close
+        document.addEventListener('keydown', onKeyDown);
+      }
+
+      function closeLyrics() {
+        overlay.classList.remove('active');
+        overlay.setAttribute('aria-hidden', 'true');
+        // restore page scrolling unless the nav menu is still open
+        if (navLinks && navLinks.classList.contains('active')) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = 'auto';
+          document.body.classList.add('show-scrollbar');
+        }
+        document.removeEventListener('keydown', onKeyDown);
+        const btn = document.querySelector('.lyrics-btn[onclick="toggleLyrics()"], .lyrics-btn');
+        if (btn) btn.focus();
+      }
+
+      function onKeyDown(e) {
+        if (e.key === 'Escape') closeLyrics();
+      }
+
+      // click outside modal closes
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closeLyrics();
+      });
+
+      closeBtn.addEventListener('click', closeLyrics);
+      closeFooter.addEventListener('click', closeLyrics);
+    })();
   </script>
 </body>
+
 </html>
