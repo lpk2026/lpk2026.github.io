@@ -20,6 +20,12 @@
       font-style: normal;
     }
 
+    @font-face {
+      font-family: 'tufuli';
+      src: url('tinta.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+    }
 
     html {
       scroll-behavior: smooth;
@@ -284,7 +290,7 @@
       justify-content: center;
       gap: 20px;
       overflow: hidden;
-      background: #F1F3E0;
+      background: #fff;
       color: #000;
     }
 
@@ -319,7 +325,7 @@
       flex-direction: column;
       justify-content: center;
       text-align: center;
-      background: #D2DCB6;
+      background: #ede8d0;
     }
 
     /* === SECTION CONTAINER === */
@@ -397,7 +403,7 @@
       width: clamp(250px, 50vw, 700px);
       height: 100%;
       flex-shrink: 0;
-      background: #333;
+      background: #7a3333;
       border-radius: 12px;
       overflow: hidden;
       display: flex;
@@ -405,7 +411,7 @@
       align-items: center;
       font-weight: bold;
       font-size: 1.2rem;
-      color: #D2DCB6;
+      color: #ede8d0;
       cursor: pointer;
       transition: transform 0.2s ease;
       opacity: 1;
@@ -433,7 +439,7 @@
       transition: transform 0.2s ease;
       font-family: 'casagrande';
       font-size: 1.5rem;
-      color: #D2DCB6;
+      color: #ede8d0;
 
     }
 
@@ -463,7 +469,7 @@
       background-size: cover;
       background-position: center;
       z-index: 1;
-      background-color: #A1BC98;
+      background-color: #7a3333;
     }
 
     .caption {
@@ -497,7 +503,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #778873;
+      background-color: #111;
     }
 
     /* === YEARBOOK SECTION === */
@@ -506,7 +512,7 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      background-color: #778873;
+      background-color: #111;
       flex: 1;
       overflow-x: auto;
       overflow-y: hidden;
@@ -529,8 +535,8 @@
       order: 2;
       transform: rotate(180deg);
       writing-mode: vertical-rl;
-      color: #F1F3E0;
-      background-color: #778873;
+      color: #fff;
+      background-color: #111;
     }
 
     /* Content layout */
@@ -548,7 +554,7 @@
     .a4-placeholder {
       height: clamp(300px, 60vw, 400px);
       aspect-ratio: 1 / 1.414;
-      background: #778873;
+      background: #111;
       border: 2px dashed #555;
       border-radius: 8px;
     }
@@ -565,6 +571,7 @@
       transition: opacity 1s ease, transform 1s ease;
       justify-content: center;
       align-items: center;
+      background-color: #111;
 
     }
 
@@ -635,7 +642,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #A1BC98;
+      background: #7a3333;
       color: #000;
       overflow: hidden;
       position: relative;
@@ -659,8 +666,8 @@
       justify-content: center;
       align-items: center;
       height: 100%;
-      background-color: #A1BC98;
-      color: #D2DCB6;
+      background-color: #7a3333;
+      color: #ede8d0;
     }
 
     .s4-slider-wrapper {
@@ -690,7 +697,6 @@
       width: 100%;
       height: 100%;
       color: #000;
-      background-color: #A1BC98;
     }
 
     .album-art {
@@ -746,13 +752,18 @@
     }
 
     .youtube-btn {
-      background: #D2DCB6;
-      color: #A1BC98;
+      color: #7a3333;
+      background: #ede8d0;
+    }
+
+    .youtube-btn-lyrics {
+      background-color: #7a3333;
+      color: #ede8d0;
     }
 
     .lyrics-btn {
       background: #111;
-      color: #D2DCB6;
+      color: #ede8d0;
       font-family: 'cherrydance';
     }
 
@@ -865,15 +876,16 @@
       scrollbar-color: rgba(180, 180, 180, 0.5) rgba(180, 180, 180, 0.1);
     }
 
-    /* LYRICS MODAL */
+    /* ===== LYRICS MODAL (styles) ===== */
+    /* Overlay */
     .lyrics-overlay {
       position: fixed;
       inset: 0;
       background: rgba(0, 0, 0, 0.6);
       display: flex;
-      align-items: flex-start; /* place modal starting from top padding */
+      align-items: flex-start; /* start a little lower on the page */
       justify-content: center;
-      padding: 220px 100px; /* 220px top & bottom, 100px left & right */
+      padding: 220px 100px; /* top/bottom & left/right */
       box-sizing: border-box;
       opacity: 0;
       pointer-events: none;
@@ -886,6 +898,7 @@
       pointer-events: auto;
     }
 
+    /* Modal card */
     .lyrics-modal {
       width: 100%;
       max-width: 960px;
@@ -898,59 +911,53 @@
       position: relative;
       transform: scale(.98);
       transition: transform 220ms ease;
-      overflow: hidden;
+      overflow: hidden; /* keep modal size fixed; scroll only the lyrics area */
+      display: flex; /* layout header, content, footer */
+      flex-direction: column;
     }
 
     .lyrics-overlay.active .lyrics-modal {
       transform: scale(1);
     }
 
-    /* Responsive fallback for small viewports */
+    /* Mobile fallback */
     @media (max-width: 640px) {
-      .lyrics-overlay { padding: 40px 16px; }
-      .lyrics-modal { max-height: calc(100vh - 80px); border-radius: 8px; }
+      /* ensure the modal is centered vertically on small viewports */
+      .lyrics-overlay { padding: 40px 16px; align-items: center; }
+      .lyrics-modal { max-height: calc(100vh - 80px); border-radius: 8px; padding-top: 44px; }
+      .lyrics-modal h3 { padding-right: 56px; }
+      .lyrics-controls { gap:6px; }
+      .lyrics-controls .album-btn, .lyrics-controls .youtube-btn { padding:6px 6px; font-size:0.85rem; }
     }
 
-    .lyrics-modal .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: transparent;
-      border: none;
-      font-size: 20px;
-      line-height: 1;
-      cursor: pointer;
-      color: #222;
-      padding: 6px;
-      border-radius: 6px;
-    }
+    /* Top-right controls inside modal (Play / YouTube / Copy) */
+    /* Footer controls styling (Play / YouTube / Copy) */
+    .lyrics-controls-footer { display:flex; gap:12px; justify-content:flex-end; align-items:center; }
+    .lyrics-controls-footer .album-btn, .lyrics-controls-footer .youtube-btn { padding:6px 10px; font-size:0.95rem; border-radius:6px; }
 
-    .lyrics-modal .close-btn:hover {
-      background: rgba(0, 0, 0, 0.06);
-    }
+    /* Close button (top-right) */
+    .lyrics-modal .close-btn { position: absolute; top: 10px; right: 10px; background: transparent; border: none; font-size: 20px; line-height: 1; cursor: pointer; color: #222; padding: 6px; border-radius: 6px; }
+    .lyrics-modal .close-btn:hover { background: rgba(0, 0, 0, 0.06); }
 
-    .lyrics-modal h3 {
-      margin: 6px 0 12px;
-      font-family: 'casagrande';
-      font-size: 1.4rem;
-    }
+    /* Title */
+    .lyrics-modal h3 { margin: 6px 0 12px; font-family: 'casagrande'; font-size: 1.4rem; }
 
+    /* Scrollable lyrics area */
     .lyrics-content {
-      overflow: auto;
-
-      padding-right: 8px;
+      overflow: auto; /* allow scrolling if needed */
+      -webkit-overflow-scrolling: touch; /* smooth scrolling on touch devices */
+      padding: 12px 8px;
       line-height: 1.5;
       white-space: pre-wrap;
       font-size: 1rem;
       background: linear-gradient(180deg, transparent 0%, transparent 92%, rgba(0, 0, 0, 0.02) 100%);
+      flex: 1 1 auto; /* fill available vertical space */
+      min-height: 0; /* allow flex child to shrink so scrolling works */
+      font-family: 'cherrydance','tufuli';
     }
 
-    .lyrics-footer {
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
-      margin-top: 12px;
-    }
+    /* Footer */
+    .lyrics-footer { display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; }
   </style>
 </head>
 
@@ -1030,6 +1037,8 @@
               </div>
               <div class="overlay white"></div>
               <div class="caption">
+                <div style="      border-radius: 12px;background-image: url(prom.png); background-size: cover;   background-position: center; width: 100%; height:calc(100% - 60px);"></div>
+                <br>
                 <h3>Prom Night</h3>
                 <p>Elegance, laughter, and a touch of nostalgia.</p>
               </div>
@@ -1110,7 +1119,7 @@
     </section>
     <section class="section4" id="song">
       <section class="slider-section" id="s4">
-        <div class="slider-title">OUR SONGS</div>
+        <div class="slider-title">OUR SONG</div>
         <div class="s4-slider-wrapper">
           <div class="album-card">
             <div class="album-art" style="background-image:url('palestine.jpg');"></div>
@@ -1142,39 +1151,58 @@
     </section>
   </div>
 
-  <!-- LYRICS MODAL -->
-  <div id="lyricsOverlay" class="lyrics-overlay" aria-hidden="true" role="dialog" aria-modal="true">
-    <div class="lyrics-modal" role="document" aria-labelledby="lyricsTitle">
-      <button class="close-btn" id="closeLyricsBtn" aria-label="Close lyrics">✕</button>
+  <!-- LYRICS MODAL (clean markup, same behavior) -->
+  <div id="lyricsOverlay" class="lyrics-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="lyricsTitle">
+    <div class="lyrics-modal" role="document">
+      <!-- Modal title (updated by JS when opening) -->
       <h3 id="lyricsTitle">Song Title — Lyrics</h3>
-      <div class="lyrics-content" id="lyricsContent" tabindex="0">
-        <!-- Put your lyrics here. Newlines preserved. Example: -->
-        Verse 1
-        Line one of lyrics...
-        Line two of lyrics...
 
-        Chorus
-        La la la...
-        banana journey
-        fohrbfr
-        efrg
-        rgr
-=
-egfef
-fe
-fe
-fe
-fe
-fe
-fed
-ed
-dedefefe
-fefefeded
-effefefef
+      <!-- Close button placed at the top-right (restored) -->
+      <button class="close-btn" id="closeLyricsBtn" aria-label="Close lyrics">✕</button>
 
+      <!-- Scrollable lyrics body (text preserved as plain text) -->
+      <div class="lyrics-content" id="lyricsContent" tabindex="0" dir="rtl">
+‎قصة لمة كبيرة يشهد بيها  l historique 
+lpk فخرة عظيمة من بالي ما نمحيك
+‎حياتي كلها فرحة مادامني عايش بيك 
+lpk hkeya magique x2
+
+Depuis 2010 palmarès يحكي علينا
+Lpk grande storia لمتنا و جمعتنا 
+‎فيها كبرت حلمتنا و فيها ما سلمنا 
+Lpk ya mi almaaa x2
+
+‎شادد الكتاب في ايدي ستيلو special 
+‎مشرجي ب حبار و برشا nostalgie 
+‎كل شيء مغبر كان اسمك يا lpk
+‎على couverture يسحر العين
+l moment fort 9essetna fantastique 
+‎تعدات اجيال و عرفنا برشا اومور
+‎خدمة و تعب والشنعة ب tambour 
+‎ملخصين في غنايا تحكيلكم على الباركور
+
+‎باج وراء باج هايم ب nostalgie
+‎القضية قضيتنا فلسطين 
+‎وشمة في قلوبنا نعيشو ب principe 
+‎بالروح و الدم عليها نحاربو
+
+‎خرج des laureats شافونا في ال media 
+‎انتي mi leyenda غرامك jamais يفنى
+‎جامي سمعنا هدرة كي قلنا diferente 
+Lpk enti hyetiii 
+‎الي حبك والله عمرو ما يخون 
+‎و الي عشقك و في غرامو مدفون
+‎في قلبو اسمك بحروف ذهب محفور 
+Lpk ya mon amour x2
       </div>
+
+      <!-- Footer controls: Play, YouTube, Copy (replaces former Close button) -->
       <div class="lyrics-footer">
-        <button class="album-btn lyrics-btn" id="closeLyricsFooter">Close</button>
+        <div class="lyrics-controls-footer">
+          <button class="album-btn lyrics-btn" id="playPauseBtn" aria-pressed="false" disabled>Play</button>
+          <button class="album-btn youtube-btn-lyrics" id="youtubeBtn" disabled>YouTube</button>
+          <button class="album-btn lyrics-btn" id="copyLyricsBtn">Copy</button>
+        </div>
       </div>
     </div>
   </div>
@@ -1184,42 +1212,44 @@ effefefef
   </footer>
 
   <script>
-    /* Preloader + Welcome Animation */
-    // Skip preloader — directly show welcome text
-    /* Preloader + Welcome Animation */
-    // Typewriter first, then welcome text
-    window.addEventListener("DOMContentLoaded", () => {
+    /* ===== Preloader & Welcome sequence ===== */
+    // Start typing intro on DOMContentLoaded, then show welcome animation and page
+    window.addEventListener('DOMContentLoaded', () => {
       typeQuote().then(() => {
-        document.querySelector(".quote-container").style.opacity = 0;
-        setTimeout(() => {
-          document.querySelector(".quote-container").remove();
-          showWelcomeText();
-        }, 800);
+        const quoteContainer = document.querySelector('.quote-container');
+        if (quoteContainer) { quoteContainer.style.opacity = 0; }
+        setTimeout(() => { if (quoteContainer) quoteContainer.remove(); showWelcomeText(); }, 800);
       });
     });
 
+    /**
+     * typeQuote
+     * Typewriter effect for the opening quote. Resolves when finished & faded.
+     */
     function typeQuote() {
       return new Promise((resolve) => {
-        const quote = document.getElementById("quote-text");
-        const lines = quote.textContent.trim().split("\n");
-        quote.innerHTML = ""; // clear text
+        const quote = document.getElementById('quote-text');
+        if (!quote) return resolve();
+
+        const lines = quote.textContent.trim().split('\n').map(l => l.trim()).filter(Boolean);
+        quote.innerHTML = '';
 
         let lineIndex = 0;
 
-        function typeLine(line, callback) {
+        function typeLine(line, done) {
           const span = document.createElement('span');
-          span.classList.add('typing');
+          span.className = 'typing';
           quote.appendChild(span);
 
           let i = 0;
           function typeChar() {
             if (i < line.length) {
               span.textContent += line.charAt(i);
-              i++;
+              i += 1;
               setTimeout(typeChar, 55);
             } else {
-              span.classList.remove('typing'); // remove cursor from finished line
-              callback();
+              span.classList.remove('typing');
+              done();
             }
           }
           typeChar();
@@ -1228,13 +1258,13 @@ effefefef
         function nextLine() {
           if (lineIndex < lines.length) {
             typeLine(lines[lineIndex], () => {
-              quote.appendChild(document.createElement("br")); // line break
-              lineIndex++;
+              quote.appendChild(document.createElement('br'));
+              lineIndex += 1;
               setTimeout(nextLine, 200);
             });
           } else {
-            // fade out smoothly
-            quote.style.transition = "opacity 1s ease";
+            // fade out and resolve
+            quote.style.transition = 'opacity 1s ease';
             quote.style.opacity = 0;
             setTimeout(resolve, 1000);
           }
@@ -1244,38 +1274,59 @@ effefefef
       });
     }
 
-
-
-
+    /**
+     * showWelcomeText
+     * Builds the welcome animation (per-letter) and then reveals the page content.
+     */
     function showWelcomeText() {
       const welcomeContainer = document.getElementById('welcomeText');
-      const textLines = ["LYCEE", "PILOTE", "KASSERINE", "WELCOMES", "YOU"];
+      if (!welcomeContainer) return;
+
+      const textLines = ['LYCEE', 'PILOTE', 'KASSERINE', 'WELCOMES', 'YOU'];
       welcomeContainer.innerHTML = '';
-      textLines.forEach((line) => {
-        const lineDiv = document.createElement('div'); lineDiv.className = 'welcome-line';
-        line.split('').forEach((char, i) => { const span = document.createElement('span'); span.textContent = char === ' ' ? '\u00A0' : char; span.style.animationDelay = `${i * 0.05}s`; lineDiv.appendChild(span); }); welcomeContainer.appendChild(lineDiv);
+
+      // Build each line as a sequence of spans (animated via CSS animationDelay)
+      textLines.forEach(line => {
+        const lineDiv = document.createElement('div');
+        lineDiv.className = 'welcome-line';
+        line.split('').forEach((char, i) => {
+          const span = document.createElement('span');
+          span.textContent = char === ' ' ? '\u00A0' : char;
+          span.style.animationDelay = `${i * 0.05}s`;
+          lineDiv.appendChild(span);
+        });
+        welcomeContainer.appendChild(lineDiv);
       });
-      welcomeContainer.style.opacity = 1;
+
+      welcomeContainer.style.opacity = '1';
+
+      // Wait for animation to finish, then reveal main content
       const totalAnimationTime = textLines.join('').length * 0.05 * 1000 + 800;
       setTimeout(() => {
-        welcomeContainer.style.opacity = 0; setTimeout(() => {
-          document.getElementById('mainContent').style.opacity = 1;
+        welcomeContainer.style.opacity = '0';
+        setTimeout(() => {
+          // Reveal main content and footer
+          document.getElementById('mainContent').style.opacity = '1';
           document.getElementById('footer').classList.add('visible');
           document.body.style.overflowY = 'scroll';
           document.body.classList.add('show-scrollbar');
-          document.getElementById('floatingWelcome').style.opacity = '1';
+          const floating = document.getElementById('floatingWelcome');
+          if (floating) floating.style.opacity = '1';
 
+          // Big blue image reveal & positioning
           const blueDiv = document.getElementById('bigBlue');
           const sectionText = document.getElementById('section1Text');
+          setTimeout(() => { if (blueDiv) { blueDiv.style.opacity = '1'; blueDiv.style.transform = 'translate(-50%, -50%) scale(1)'; } }, 500);
 
-          // Step 1: fade in and scale
-          setTimeout(() => { blueDiv.style.opacity = 1; blueDiv.style.transform = 'translate(-50%, -50%) scale(1)'; }, 500);
+          setTimeout(() => {
+            if (blueDiv) {
+              const blueRect = blueDiv.getBoundingClientRect();
+              const offset = (window.innerHeight / 2) - (blueRect.height / 2) - 100;
+              blueDiv.style.transform = `translate(-50%, calc(-50% - ${offset}px)) scale(1)`;
+            }
+          }, 2000);
 
-          // Step 2: slide up by 20% of viewport
-          setTimeout(() => { const blueRect = blueDiv.getBoundingClientRect(); const currentTop = blueRect.top + window.scrollY; const targetTop = 100; const offset = (window.innerHeight / 2) - (blueRect.height / 2) - targetTop; blueDiv.style.transform = `translate(-50%, calc(-50% - ${offset}px)) scale(1)`; }, 2000);
-
-          // Step 3: show paragraph
-          setTimeout(() => { sectionText.style.opacity = 1; sectionText.style.transform = 'translateY(0)'; }, 3000);
+          setTimeout(() => { if (sectionText) { sectionText.style.opacity = '1'; sectionText.style.transform = 'translateY(0)'; } }, 3000);
 
           document.getElementById('topHeader').classList.add('visible');
           welcomeContainer.style.display = 'none';
@@ -1283,108 +1334,83 @@ effefefef
       }, totalAnimationTime + 1200);
     }
 
-    /* Header scroll behavior */
+    /* ===== Header behavior: show menu button on scroll ===== */
     const topHeader = document.getElementById('topHeader');
     const hamburgerMenu = document.getElementById('hamburger');
     const headerTitles = document.querySelector('.header-titles');
-    window.addEventListener('scroll', () => { if (window.scrollY > 100) { headerTitles.style.opacity = 0; hamburgerMenu.style.opacity = 1; headerTitles.style.visibility = 'hidden'; hamburgerMenu.style.visibility = 'visible'; } else { headerTitles.style.opacity = 1; hamburgerMenu.style.opacity = 0; headerTitles.style.visibility = 'visible'; hamburgerMenu.style.visibility = 'hidden'; } });
-
-    /* Hamburger Menu */
     const navLinks = document.getElementById('navLinks');
-    hamburgerMenu.addEventListener('click', () => {
-      const isActive = navLinks.classList.toggle('active');
-      hamburgerMenu.classList.toggle('active');
 
-      if (isActive) {
-        document.body.style.overflow = 'hidden'; // block scroll
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        if (headerTitles) { headerTitles.style.opacity = '0'; headerTitles.style.visibility = 'hidden'; }
+        if (hamburgerMenu) { hamburgerMenu.style.opacity = '1'; hamburgerMenu.style.visibility = 'visible'; }
       } else {
-        document.body.style.overflow = 'auto'; // restore scroll
+        if (headerTitles) { headerTitles.style.opacity = '1'; headerTitles.style.visibility = 'visible'; }
+        if (hamburgerMenu) { hamburgerMenu.style.opacity = '0'; hamburgerMenu.style.visibility = 'hidden'; }
       }
     });
 
+    /* Hamburger menu toggle (slide-out navigation) */
+    if (hamburgerMenu && navLinks) {
+      hamburgerMenu.addEventListener('click', () => {
+        const isActive = navLinks.classList.toggle('active');
+        hamburgerMenu.classList.toggle('active');
+        document.body.style.overflow = isActive ? 'hidden' : 'auto';
+      });
+    }
 
+    /* ===== Intersection observers: reveal elements when scrolled into view ===== */
+    const observeAndReveal = (selector, options = { threshold: 0.2 }) => {
+      document.querySelectorAll(selector).forEach(node => {
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+          });
+        }, options);
+        observer.observe(node);
+      });
+    };
 
+    observeAndReveal('.slider-section');
+    observeAndReveal('.yearbook-wrapper');
+    observeAndReveal('.s4-slider-wrapper');
 
-    /* Section2 Box Fade In */
-
-    // === SECTION ANIMATION OBSERVER ===
-    const section2 = document.querySelectorAll('.slider-section');
-    section2.forEach(section => {
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.2 });
-      observer.observe(section);
-    });
-
-    const section3 = document.querySelectorAll('.yearbook-wrapper');
-    section3.forEach(section => {
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.2 });
-      observer.observe(section);
-    });
-
-    const section4 = document.querySelectorAll('.s4-slider-wrapper');
-    section4.forEach(section => {
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.2 });
-      observer.observe(section);
-    });
-
-
-
-
-    // === DRAG / TOUCH / SCROLL FOR SLIDERS ===
+    /* ===== Drag / touch scrolling for horizontal sliders ===== */
     document.querySelectorAll('.slider').forEach(slider => {
-      let isDown = false, startX, scrollLeft;
+      let isDown = false;
+      let startX = 0;
+      let scrollLeft = 0;
+
       slider.addEventListener('mousedown', e => { isDown = true; startX = e.pageX - slider.offsetLeft; scrollLeft = slider.scrollLeft; });
-      slider.addEventListener('mouseleave', () => isDown = false);
-      slider.addEventListener('mouseup', () => isDown = false);
-      slider.addEventListener('mousemove', e => { if (!isDown) return; e.preventDefault(); slider.scrollLeft = scrollLeft - (e.pageX - startX); });
-      slider.addEventListener('touchstart', e => { startX = e.touches[0].pageX - slider.offsetLeft; scrollLeft = slider.scrollLeft; });
-      slider.addEventListener('touchmove', e => { slider.scrollLeft = scrollLeft - (e.touches[0].pageX - startX); });
-      slider.addEventListener('wheel', e => {
-        if (e.shiftKey) { // scroll horizontally if shift is held
-          e.preventDefault();
-          slider.scrollLeft += e.deltaY;
-        }
-        // otherwise, let vertical scroll happen naturally
+      slider.addEventListener('mouseleave', () => { isDown = false; });
+      slider.addEventListener('mouseup', () => { isDown = false; });
+      slider.addEventListener('mousemove', e => {
+        if (!isDown) return; e.preventDefault(); slider.scrollLeft = scrollLeft - (e.pageX - startX);
       });
 
+      slider.addEventListener('touchstart', e => { startX = e.touches[0].pageX - slider.offsetLeft; scrollLeft = slider.scrollLeft; });
+      slider.addEventListener('touchmove', e => { slider.scrollLeft = scrollLeft - (e.touches[0].pageX - startX); });
+
+      // Allow horizontal scrolling by holding Shift while wheel-scrolling
+      slider.addEventListener('wheel', e => {
+        if (e.shiftKey) { e.preventDefault(); slider.scrollLeft += e.deltaY; }
+      });
     });
 
-    /*Section 3 vid*/
-    (() => {
+    /* ===== Deferred video loading for section 3 (if present) ===== */
+    (function () {
       const VIDEO_ID = 'placeholder';
       const thumb = document.getElementById('videoThumb');
       const playBtn = document.getElementById('playBtn');
       const embedWrap = document.getElementById('embedWrap');
 
       function loadIframe() {
-        if (!embedWrap) return; // guard if element missing
-        if (embedWrap.querySelector('iframe')) return;
+        if (!embedWrap || embedWrap.querySelector('iframe')) return;
         const ifr = document.createElement('iframe');
         ifr.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
         ifr.setAttribute('allowfullscreen', '');
         ifr.src = `https://www.youtube.com/embed/${VIDEO_ID}?rel=0&modestbranding=1&autoplay=1`;
-        ifr.style.width = '100%';
-        ifr.style.height = '100%';
+        ifr.style.width = '100%'; ifr.style.height = '100%';
         embedWrap.appendChild(ifr);
         if (thumb) thumb.style.display = 'none';
       }
@@ -1393,7 +1419,7 @@ effefefef
       if (playBtn) playBtn.addEventListener('click', loadIframe);
     })();
 
-    // LYRICS MODAL HANDLERS
+    /* ===== Lyrics modal: open/close and accessibility (refactored) ===== */
     (function () {
       const overlay = document.getElementById('lyricsOverlay');
       const closeBtn = document.getElementById('closeLyricsBtn');
@@ -1401,50 +1427,100 @@ effefefef
       const lyricsContent = document.getElementById('lyricsContent');
       const body = document.body;
 
-      window.toggleLyrics = function (lyricsText, title) {
-        // optional args: lyricsText (string) and title (string)
-        if (lyricsText) lyricsContent.textContent = lyricsText;
+      const playPauseBtn = document.getElementById('playPauseBtn');
+      const youtubeBtn = document.getElementById('youtubeBtn');
+      const copyBtn = document.getElementById('copyLyricsBtn');
+
+      // Public API: toggleLyrics(lyricsText?, title?, audioUrl?, youtubeUrl?) — optional media links
+      window.toggleLyrics = function (lyricsText, title, audioUrl, youtubeUrl) {
+        // set text and track original
+        if (lyricsText != null && lyricsContent) { lyricsContent.textContent = lyricsText; }
         if (title) document.getElementById('lyricsTitle').textContent = title;
+
+        // attach optional media urls on overlay dataset
+        if (audioUrl) overlay.dataset.audioUrl = audioUrl; else delete overlay.dataset.audioUrl;
+        if (youtubeUrl) overlay.dataset.youtubeUrl = youtubeUrl; else delete overlay.dataset.youtubeUrl;
+
+        // enable/disable top controls based on availability
+        if (playPauseBtn) { playPauseBtn.disabled = !overlay.dataset.audioUrl; playPauseBtn.textContent = 'Play'; playPauseBtn.setAttribute('aria-pressed','false'); }
+        if (youtubeBtn) { youtubeBtn.disabled = !overlay.dataset.youtubeUrl; }
+
         openLyrics();
       };
 
+      // local audio holder
+      function createAudio(url) { const a = new Audio(url); a.preload = 'auto'; return a; }
+
       function openLyrics() {
+        if (!overlay) return;
         overlay.classList.add('active');
         overlay.setAttribute('aria-hidden', 'false');
         body.style.overflow = 'hidden';
-        // focus for keyboard users
-        setTimeout(() => lyricsContent.focus(), 220);
-        // trap key ESC to close
+        // focus the play button (or copy) to start
+        setTimeout(() => { if (playPauseBtn && !playPauseBtn.disabled) playPauseBtn.focus(); else if (copyBtn) copyBtn.focus(); }, 220);
         document.addEventListener('keydown', onKeyDown);
       }
 
       function closeLyrics() {
+        if (!overlay) return;
+        // stop audio if playing
+        if (overlay._audio) { try { overlay._audio.pause(); overlay._audio.currentTime = 0; } catch (e) {} overlay._audio = null; }
         overlay.classList.remove('active');
         overlay.setAttribute('aria-hidden', 'true');
-        // restore page scrolling unless the nav menu is still open
+        // restore scrolling unless nav menu is open
         if (navLinks && navLinks.classList.contains('active')) {
-          document.body.style.overflow = 'hidden';
+          body.style.overflow = 'hidden';
         } else {
-          document.body.style.overflow = 'auto';
-          document.body.classList.add('show-scrollbar');
+          body.style.overflow = 'auto';
+          body.classList.add('show-scrollbar');
         }
         document.removeEventListener('keydown', onKeyDown);
-        const btn = document.querySelector('.lyrics-btn[onclick="toggleLyrics()"], .lyrics-btn');
-        if (btn) btn.focus();
+        // return focus to a reasonable control (if present)
+        const trigger = document.querySelector('.lyrics-btn');
+        if (trigger) trigger.focus();
       }
 
       function onKeyDown(e) {
         if (e.key === 'Escape') closeLyrics();
       }
 
-      // click outside modal closes
-      overlay.addEventListener('click', (e) => {
-        if (e.target === overlay) closeLyrics();
-      });
+      // Close when clicking backdrop (only if target is the overlay)
+      if (overlay) overlay.addEventListener('click', (e) => { if (e.target === overlay) closeLyrics(); });
 
-      closeBtn.addEventListener('click', closeLyrics);
-      closeFooter.addEventListener('click', closeLyrics);
-    })();
+      if (closeBtn) closeBtn.addEventListener('click', closeLyrics);
+      if (closeFooter) closeFooter.addEventListener('click', closeLyrics);
+
+      // Play/pause handler (uses optional overlay.dataset.audioUrl)
+      if (playPauseBtn) {
+        playPauseBtn.addEventListener('click', () => {
+          const audioUrl = overlay ? overlay.dataset.audioUrl : null;
+          if (!audioUrl) return; // nothing to play
+
+          if (!overlay._audio) {
+            overlay._audio = createAudio(audioUrl);
+            overlay._audio.play();
+            playPauseBtn.textContent = 'Pause';
+            playPauseBtn.setAttribute('aria-pressed','true');
+            overlay._audio.addEventListener('ended', () => { playPauseBtn.textContent = 'Play'; playPauseBtn.setAttribute('aria-pressed','false'); overlay._audio = null; });
+          } else {
+            if (!overlay._audio.paused) { overlay._audio.pause(); playPauseBtn.textContent = 'Play'; playPauseBtn.setAttribute('aria-pressed','false'); }
+            else { overlay._audio.play(); playPauseBtn.textContent = 'Pause'; playPauseBtn.setAttribute('aria-pressed','true'); }
+          }
+        });
+      }
+
+      // YouTube button: tries to open overlay.dataset.youtubeUrl
+      if (youtubeBtn) {
+        youtubeBtn.addEventListener('click', () => {
+          const url = overlay ? overlay.dataset.youtubeUrl : null;
+          if (!url) return; window.open(url, '_blank', 'noopener');
+        });
+      }
+
+      // Copy lyrics
+      if (copyBtn) copyBtn.addEventListener('click', async () => {
+        try { await navigator.clipboard.writeText(lyricsContent.textContent); copyBtn.textContent = 'Copied'; setTimeout(()=> copyBtn.textContent='Copy',1200); } catch (e) { console.warn('Copy failed', e); }
+      });    })();
   </script>
 </body>
 
