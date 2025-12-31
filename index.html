@@ -1357,6 +1357,18 @@ Lpk ya mon amour x2
         hamburgerMenu.classList.toggle('active');
         document.body.style.overflow = isActive ? 'hidden' : 'auto';
       });
+
+      // Close the slide-out menu automatically when a link inside it is clicked
+      navLinks.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (!link) return; // ignore clicks that are not on links
+
+        // Collapse the nav and restore scrolling
+        navLinks.classList.remove('active');
+        hamburgerMenu.classList.remove('active');
+        document.body.style.overflow = 'auto';
+        document.body.classList.add('show-scrollbar');
+      });
     }
 
     /* ===== Intersection observers: reveal elements when scrolled into view ===== */
