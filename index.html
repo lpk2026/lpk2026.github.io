@@ -64,7 +64,7 @@
     #quote-text {
       font-size: clamp(1.2rem, 3vw, 2rem);
       font-weight: 500;
-      font-family:'Times New Roman', Times, serif;
+      font-family: 'Times New Roman', Times, serif;
       color: white;
       max-width: 700px;
       line-height: 1.4;
@@ -833,7 +833,6 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, calc(-50% + 80px));
-      background-color: rgba(255, 255, 255, 0.7);
       color: #000;
       padding: 10px;
     }
@@ -883,9 +882,11 @@
       inset: 0;
       background: rgba(0, 0, 0, 0.6);
       display: flex;
-      align-items: flex-start; /* start a little lower on the page */
+      align-items: flex-start;
+      /* start a little lower on the page */
       justify-content: center;
-      padding: 220px 100px; /* top/bottom & left/right */
+      padding: 220px 100px;
+      /* top/bottom & left/right */
       box-sizing: border-box;
       opacity: 0;
       pointer-events: none;
@@ -902,7 +903,8 @@
     .lyrics-modal {
       width: 100%;
       max-width: 960px;
-      max-height: calc(100vh - 440px); /* leaves 220px top + 220px bottom */
+      max-height: calc(100vh - 440px);
+      /* leaves 220px top + 220px bottom */
       background: #fff;
       color: #000;
       border-radius: 12px;
@@ -911,8 +913,10 @@
       position: relative;
       transform: scale(.98);
       transition: transform 220ms ease;
-      overflow: hidden; /* keep modal size fixed; scroll only the lyrics area */
-      display: flex; /* layout header, content, footer */
+      overflow: hidden;
+      /* keep modal size fixed; scroll only the lyrics area */
+      display: flex;
+      /* layout header, content, footer */
       flex-direction: column;
     }
 
@@ -922,42 +926,101 @@
 
     /* Mobile fallback */
     @media (max-width: 640px) {
+
       /* ensure the modal is centered vertically on small viewports */
-      .lyrics-overlay { padding: 40px 16px; align-items: center; }
-      .lyrics-modal { max-height: calc(100vh - 80px); border-radius: 8px; padding-top: 44px; }
-      .lyrics-modal h3 { padding-right: 56px; }
-      .lyrics-controls { gap:6px; }
-      .lyrics-controls .album-btn, .lyrics-controls .youtube-btn { padding:6px 6px; font-size:0.85rem; }
+      .lyrics-overlay {
+        padding: 40px 16px;
+        align-items: center;
+      }
+
+      .lyrics-modal {
+        max-height: calc(100vh - 80px);
+        border-radius: 8px;
+        padding-top: 44px;
+      }
+
+      .lyrics-modal h3 {
+        padding-right: 56px;
+      }
+
+      .lyrics-controls {
+        gap: 6px;
+      }
+
+      .lyrics-controls .album-btn,
+      .lyrics-controls .youtube-btn {
+        padding: 6px 6px;
+        font-size: 0.85rem;
+      }
     }
 
     /* Top-right controls inside modal (Play / YouTube / Copy) */
     /* Footer controls styling (Play / YouTube / Copy) */
-    .lyrics-controls-footer { display:flex; gap:12px; justify-content:flex-end; align-items:center; }
-    .lyrics-controls-footer .album-btn, .lyrics-controls-footer .youtube-btn { padding:6px 10px; font-size:0.95rem; border-radius:6px; }
+    .lyrics-controls-footer {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .lyrics-controls-footer .album-btn,
+    .lyrics-controls-footer .youtube-btn {
+      padding: 6px 10px;
+      font-size: 0.95rem;
+      border-radius: 6px;
+    }
 
     /* Close button (top-right) */
-    .lyrics-modal .close-btn { position: absolute; top: 10px; right: 10px; background: transparent; border: none; font-size: 20px; line-height: 1; cursor: pointer; color: #222; padding: 6px; border-radius: 6px; }
-    .lyrics-modal .close-btn:hover { background: rgba(0, 0, 0, 0.06); }
+    .lyrics-modal .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: transparent;
+      border: none;
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+      color: #222;
+      padding: 6px;
+      border-radius: 6px;
+    }
+
+    .lyrics-modal .close-btn:hover {
+      background: rgba(0, 0, 0, 0.06);
+    }
 
     /* Title */
-    .lyrics-modal h3 { margin: 6px 0 12px; font-family: 'casagrande'; font-size: 1.4rem; }
+    .lyrics-modal h3 {
+      margin: 6px 0 12px;
+      font-family: 'casagrande';
+      font-size: 1.4rem;
+    }
 
     /* Scrollable lyrics area */
     .lyrics-content {
-      overflow: auto; /* allow scrolling if needed */
-      -webkit-overflow-scrolling: touch; /* smooth scrolling on touch devices */
+      overflow: auto;
+      /* allow scrolling if needed */
+      -webkit-overflow-scrolling: touch;
+      /* smooth scrolling on touch devices */
       padding: 12px 8px;
       line-height: 1.5;
       white-space: pre-wrap;
       font-size: 1rem;
       background: linear-gradient(180deg, transparent 0%, transparent 92%, rgba(0, 0, 0, 0.02) 100%);
-      flex: 1 1 auto; /* fill available vertical space */
-      min-height: 0; /* allow flex child to shrink so scrolling works */
-      font-family: 'cherrydance','tufuli';
+      flex: 1 1 auto;
+      /* fill available vertical space */
+      min-height: 0;
+      /* allow flex child to shrink so scrolling works */
+      font-family: 'cherrydance', 'tufuli';
     }
 
     /* Footer */
-    .lyrics-footer { display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; }
+    .lyrics-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 12px;
+    }
   </style>
 </head>
 
@@ -1022,33 +1085,27 @@
 
             <!-- Event 1 -->
             <div class="slide">
-              <div class="slide-bg" style="background-image:url('https://via.placeholder.com/400x250?text=Ramadhan');">
-              </div>
-              <div class="overlay red"></div>
               <div class="caption">
-                <h3>Ramadhan Gathering</h3>
-                <p>Moments of unity and joy during the holy month.</p>
-              </div>
-            </div>
-
-            <!-- Event 2 -->
-            <div class="slide">
-              <div class="slide-bg" style="background-image:url('https://via.placeholder.com/400x250?text=Prom');">
-              </div>
-              <div class="overlay white"></div>
-              <div class="caption">
-                <div style="      border-radius: 12px;background-image: url(prom.png); background-size: cover;   background-position: center; width: 100%; height:calc(100% - 60px);"></div>
+                <div style="border-radius: 12px; background-image: url(prom.png); background-size: cover;   background-position: center; width: 100%; height:calc(100% - 60px);">
+                </div>
                 <br>
                 <h3>Prom Night</h3>
                 <p>Elegance, laughter, and a touch of nostalgia.</p>
               </div>
             </div>
 
+
+            <!-- Event 2 -->
+            <div class="slide">
+              <div class="caption">
+                <h3>Ramadhan Gathering</h3>
+                <p>Moments of unity and joy during the holy month.</p>
+              </div>
+            </div>
+
+
             <!-- Event 3 -->
             <div class="slide">
-              <div class="slide-bg"
-                style="background-image:url('https://via.placeholder.com/400x250?text=Bac+Kickoff');"></div>
-              <div class="overlay red"></div>
               <div class="caption">
                 <h3>Bac Kickoff</h3>
                 <p>Energy, music, and the spirit of victory.</p>
@@ -1057,9 +1114,6 @@
 
             <!-- Event 4 -->
             <div class="slide">
-              <div class="slide-bg" style="background-image:url('https://via.placeholder.com/400x250?text=Bac+Sport');">
-              </div>
-              <div class="overlay white"></div>
               <div class="caption">
                 <h3>Bac Sport</h3>
                 <p>Strength and teamwork shining through every moment.</p>
@@ -1142,17 +1196,13 @@
     <section class="section5">
       <div id="spin"></div>
       <div id="div"></div>
-      <div id="speech">
-        <img src="freeps.png" style="width: clamp(400px, 80vw, 600px);">
-        <p>At Lycée Pilote Kasserine, we will never forget the struggle of the Palestinian people. We stand unshakably
-          with them in their fight for justice, freedom, and dignity. Their cause is our cause—today, tomorrow, and
-          always.</p>
-      </div>
+      <div id="speech"><img src="ps.svg" style="width: 80vw;"></div>
     </section>
   </div>
 
   <!-- LYRICS MODAL (clean markup, same behavior) -->
-  <div id="lyricsOverlay" class="lyrics-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="lyricsTitle">
+  <div id="lyricsOverlay" class="lyrics-overlay" aria-hidden="true" role="dialog" aria-modal="true"
+    aria-labelledby="lyricsTitle">
     <div class="lyrics-modal" role="document">
       <!-- Modal title (updated by JS when opening) -->
       <h3 id="lyricsTitle">Song Title — Lyrics</h3>
@@ -1162,38 +1212,38 @@
 
       <!-- Scrollable lyrics body (text preserved as plain text) -->
       <div class="lyrics-content" id="lyricsContent" tabindex="0" dir="rtl">
-‎قصة لمة كبيرة يشهد بيها  l historique 
-lpk فخرة عظيمة من بالي ما نمحيك
-‎حياتي كلها فرحة مادامني عايش بيك 
-lpk hkeya magique x2
+        ‎قصة لمة كبيرة يشهد بيها l historique
+        lpk فخرة عظيمة من بالي ما نمحيك
+        ‎حياتي كلها فرحة مادامني عايش بيك
+        lpk hkeya magique x2
 
-Depuis 2010 palmarès يحكي علينا
-Lpk grande storia لمتنا و جمعتنا 
-‎فيها كبرت حلمتنا و فيها ما سلمنا 
-Lpk ya mi almaaa x2
+        Depuis 2010 palmarès يحكي علينا
+        Lpk grande storia لمتنا و جمعتنا
+        ‎فيها كبرت حلمتنا و فيها ما سلمنا
+        Lpk ya mi almaaa x2
 
-‎شادد الكتاب في ايدي ستيلو special 
-‎مشرجي ب حبار و برشا nostalgie 
-‎كل شيء مغبر كان اسمك يا lpk
-‎على couverture يسحر العين
-l moment fort 9essetna fantastique 
-‎تعدات اجيال و عرفنا برشا اومور
-‎خدمة و تعب والشنعة ب tambour 
-‎ملخصين في غنايا تحكيلكم على الباركور
+        ‎شادد الكتاب في ايدي ستيلو special
+        ‎مشرجي ب حبار و برشا nostalgie
+        ‎كل شيء مغبر كان اسمك يا lpk
+        ‎على couverture يسحر العين
+        l moment fort 9essetna fantastique
+        ‎تعدات اجيال و عرفنا برشا اومور
+        ‎خدمة و تعب والشنعة ب tambour
+        ‎ملخصين في غنايا تحكيلكم على الباركور
 
-‎باج وراء باج هايم ب nostalgie
-‎القضية قضيتنا فلسطين 
-‎وشمة في قلوبنا نعيشو ب principe 
-‎بالروح و الدم عليها نحاربو
+        ‎باج وراء باج هايم ب nostalgie
+        ‎القضية قضيتنا فلسطين
+        ‎وشمة في قلوبنا نعيشو ب principe
+        ‎بالروح و الدم عليها نحاربو
 
-‎خرج des laureats شافونا في ال media 
-‎انتي mi leyenda غرامك jamais يفنى
-‎جامي سمعنا هدرة كي قلنا diferente 
-Lpk enti hyetiii 
-‎الي حبك والله عمرو ما يخون 
-‎و الي عشقك و في غرامو مدفون
-‎في قلبو اسمك بحروف ذهب محفور 
-Lpk ya mon amour x2
+        ‎خرج des laureats شافونا في ال media
+        ‎انتي mi leyenda غرامك jamais يفنى
+        ‎جامي سمعنا هدرة كي قلنا diferente
+        Lpk enti hyetiii
+        ‎الي حبك والله عمرو ما يخون
+        ‎و الي عشقك و في غرامو مدفون
+        ‎في قلبو اسمك بحروف ذهب محفور
+        Lpk ya mon amour x2
       </div>
 
       <!-- Footer controls: Play, YouTube, Copy (replaces former Close button) -->
@@ -1208,7 +1258,7 @@ Lpk ya mon amour x2
   </div>
 
   <footer id="footer">
-    <p>Goodbye — see you again soon 💙</p>
+    <p>LPK 2026</p>
   </footer>
 
   <script>
@@ -1454,7 +1504,7 @@ Lpk ya mon amour x2
         if (youtubeUrl) overlay.dataset.youtubeUrl = youtubeUrl; else delete overlay.dataset.youtubeUrl;
 
         // enable/disable top controls based on availability
-        if (playPauseBtn) { playPauseBtn.disabled = !overlay.dataset.audioUrl; playPauseBtn.textContent = 'Play'; playPauseBtn.setAttribute('aria-pressed','false'); }
+        if (playPauseBtn) { playPauseBtn.disabled = !overlay.dataset.audioUrl; playPauseBtn.textContent = 'Play'; playPauseBtn.setAttribute('aria-pressed', 'false'); }
         if (youtubeBtn) { youtubeBtn.disabled = !overlay.dataset.youtubeUrl; }
 
         openLyrics();
@@ -1476,7 +1526,7 @@ Lpk ya mon amour x2
       function closeLyrics() {
         if (!overlay) return;
         // stop audio if playing
-        if (overlay._audio) { try { overlay._audio.pause(); overlay._audio.currentTime = 0; } catch (e) {} overlay._audio = null; }
+        if (overlay._audio) { try { overlay._audio.pause(); overlay._audio.currentTime = 0; } catch (e) { } overlay._audio = null; }
         overlay.classList.remove('active');
         overlay.setAttribute('aria-hidden', 'true');
         // restore scrolling unless nav menu is open
@@ -1512,11 +1562,11 @@ Lpk ya mon amour x2
             overlay._audio = createAudio(audioUrl);
             overlay._audio.play();
             playPauseBtn.textContent = 'Pause';
-            playPauseBtn.setAttribute('aria-pressed','true');
-            overlay._audio.addEventListener('ended', () => { playPauseBtn.textContent = 'Play'; playPauseBtn.setAttribute('aria-pressed','false'); overlay._audio = null; });
+            playPauseBtn.setAttribute('aria-pressed', 'true');
+            overlay._audio.addEventListener('ended', () => { playPauseBtn.textContent = 'Play'; playPauseBtn.setAttribute('aria-pressed', 'false'); overlay._audio = null; });
           } else {
-            if (!overlay._audio.paused) { overlay._audio.pause(); playPauseBtn.textContent = 'Play'; playPauseBtn.setAttribute('aria-pressed','false'); }
-            else { overlay._audio.play(); playPauseBtn.textContent = 'Pause'; playPauseBtn.setAttribute('aria-pressed','true'); }
+            if (!overlay._audio.paused) { overlay._audio.pause(); playPauseBtn.textContent = 'Play'; playPauseBtn.setAttribute('aria-pressed', 'false'); }
+            else { overlay._audio.play(); playPauseBtn.textContent = 'Pause'; playPauseBtn.setAttribute('aria-pressed', 'true'); }
           }
         });
       }
@@ -1531,8 +1581,9 @@ Lpk ya mon amour x2
 
       // Copy lyrics
       if (copyBtn) copyBtn.addEventListener('click', async () => {
-        try { await navigator.clipboard.writeText(lyricsContent.textContent); copyBtn.textContent = 'Copied'; setTimeout(()=> copyBtn.textContent='Copy',1200); } catch (e) { console.warn('Copy failed', e); }
-      });    })();
+        try { await navigator.clipboard.writeText(lyricsContent.textContent); copyBtn.textContent = 'Copied'; setTimeout(() => copyBtn.textContent = 'Copy', 1200); } catch (e) { console.warn('Copy failed', e); }
+      });
+    })();
   </script>
 </body>
 
