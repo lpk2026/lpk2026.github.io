@@ -783,7 +783,7 @@
     /*Section 5*/
 
     .section5 {
-      height: 700px;
+      height: calc(37.48760vw + 163px);
       position: relative;
       overflow: hidden;
       display: flex;
@@ -799,20 +799,20 @@
       height: 90px;
       width: 100%;
       position: absolute;
-      bottom: 565px;
+      top: 45px;
       left: 0;
       z-index: 1;
       animation: scrollLeft 15s linear infinite;
     }
 
     #div {
-      background-image: url(/palestine.jpg);
+      background-image: url(/palestine1.jpg);
       background-repeat: repeat-x;
       background-size: contain;
       width: 100%;
-      height: 700px;
+      height: 163px;
       position: absolute;
-      bottom: 0;
+      top: 0;
       left: 0;
       z-index: 0;
     }
@@ -830,11 +830,15 @@
     #speech {
       z-index: 999;
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, calc(-50% + 80px));
-      color: #000;
-      padding: 10px;
+      background-image: url(palestine2.jpg);
+      background-repeat: repeat;
+      width: 100%;
+      height: calc(37.48760vw);
+      bottom:0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     footer {
@@ -1084,7 +1088,7 @@
           <div class="slider">
 
             <!-- Event 1 -->
-            <div class="slide">
+            <div class="slide" onclick="window.location.href='gallery.html#prom';">
               <div class="caption">
                 <div style="border-radius: 12px; background-image: url(prom.png); background-size: cover;   background-position: center; width: 100%; height:calc(100% - 60px);">
                 </div>
@@ -1196,7 +1200,7 @@
     <section class="section5">
       <div id="spin"></div>
       <div id="div"></div>
-      <div id="speech"><img src="ps.svg" style="width: 80vw;"></div>
+      <div id="speech"><img src="ps.svg" style="width: 90vw; top:5vw;"></div>
     </section>
   </div>
 
